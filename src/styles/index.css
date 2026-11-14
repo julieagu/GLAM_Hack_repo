@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/*
+ * Area theming. Every screen belongs to one area; set it with
+ * <div data-area="artwork | social | conservation"> and use the
+ * `area` colour family in classes: bg-area, text-area, bg-area-soft,
+ * text-area-ink, border-area-strong …
+ */
+/*
+ * App layout constant (not a Paper token): widest phone we design for.
+ * Phones fill the screen edge to edge; from md (tablet) the mobile app
+ * becomes a centred column of this width.
+ */
+@theme {
+  --container-phone: 430px;
+}
+
+/* Conversation deck: the decided card flies off from where the finger left it. */
+@keyframes card-fly {
+  from {
+    transform: translateX(var(--from-x)) rotate(var(--from-r));
+  }
+  to {
+    transform: translateX(var(--to-x)) translateY(40px) rotate(var(--to-r));
+  }
+}
+
+@theme inline {
+  --color-area: var(--area, var(--color-white));
+  --color-area-soft: var(--area-soft, var(--color-stone));
+  --color-area-strong: var(--area-strong, var(--color-ink));
+  --color-area-ink: var(--area-ink, var(--color-ink-muted));
+}
+
+[data-area="artwork"] {
+  --area: var(--color-mint-500);
+  --area-soft: var(--color-mint-200);
+  --area-strong: var(--color-mint-700);
+  --area-ink: var(--color-mint-900);
+}
+[data-area="social"] {
+  --area: var(--color-orange-500);
+  --area-soft: var(--color-orange-200);
+  --area-strong: var(--color-orange-700);
+  --area-ink: var(--color-orange-900);
+}
+[data-area="conservation"] {
+  --area: var(--color-blue-500);
+  --area-soft: var(--color-blue-200);
+  --area-strong: var(--color-blue-700);
+  --area-ink: var(--color-blue-900);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+  }
+  body {
+    @apply bg-white font-sans text-body font-light text-ink;
+    overflow-wrap: anywhere;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  /* Rubber-band overscroll shows the screen's colour, not a white strip. */
+  html:has([data-area="artwork"]) { background: var(--color-mint-500); }
+  html:has([data-area="social"]) { background: var(--color-orange-500); }
+  html:has([data-area="conservation"]) { background: var(--color-blue-500); }
+  @media (width >= 48rem) {
+    html:has([data-area]) { background: var(--color-stone); }
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}

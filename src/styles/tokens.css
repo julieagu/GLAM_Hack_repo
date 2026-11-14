@@ -1,0 +1,140 @@
+/*
+ * Design tokens — Tailwind v4 theme.
+ * Source of truth: Paper file "Glam_hack", page "Design System v2 – Dev handoff".
+ * Exported from Paper on 2026-11-14. Edit tokens in Paper first, then re-export here.
+ *
+ * Spacing: the DS spacing scale (4 / 8 / 12 / 16 / 24 / 32 / 40 / 80, plus 6 and 20)
+ * maps onto Tailwind's default 4px step, so it is NOT overridden here:
+ *   4 → 1 · 6 → 1.5 · 8 → 2 · 12 → 3 · 16 → 4 · 20 → 5 · 24 → 6 · 32 → 8 · 40 → 10 · 80 → 20
+ * (Paper names them spacing-1…8; overriding p-5/p-8 etc. would silently change Tailwind's scale.)
+ *
+ * `static` = every token is always emitted as a CSS variable on :root, even if no
+ * utility uses it, so `var(--color-mint-300)` works in inline styles and SVG too.
+ */
+
+@theme static {
+  /* ---------- Neutrals ---------- */
+  --color-ink: #000000;
+  --color-ink-soft: #222222;
+  --color-ink-muted: #00000099;
+  --color-line: #0000001f;
+  --color-scrim-line: #0000002e;
+  --color-track: #00000033;
+  --color-stone: #f6f5f3;
+  --color-white: #ffffff;
+  --color-surface: var(--color-white);
+  --color-surface-translucent: #ffffff80;
+  --color-on-ink-muted: #ffffffb3;
+
+  /* ---------- Blue · Conservation ---------- */
+  --color-blue-100: #f0f5ff;
+  --color-blue-200: #dce9fe;
+  --color-blue-300: #bed5fe;
+  --color-blue-400: #91b8ff;
+  --color-blue-500: #639aff;
+  --color-blue-600: #487bda;
+  --color-blue-700: #315eb1;
+  --color-blue-800: #1f4386;
+  --color-blue-900: #0f295b;
+  --color-blue: var(--color-blue-500);
+  --color-blue-soft: var(--color-blue-200);
+
+  /* ---------- Mint · Artwork information ---------- */
+  --color-mint-100: #e7fbf0;
+  --color-mint-200: #c9f4dd;
+  --color-mint-300: #9be8c1;
+  --color-mint-400: #73deac;
+  --color-mint-500: #3fd498;
+  --color-mint-600: #0bac76;
+  --color-mint-700: #05875b;
+  --color-mint-800: #026242;
+  --color-mint-900: #02402a;
+  --color-mint: var(--color-mint-500);
+  --color-mint-soft: var(--color-mint-200);
+
+  /* ---------- Orange · Social impact ---------- */
+  --color-orange-100: #fff2ec;
+  --color-orange-200: #fee1d2;
+  --color-orange-300: #ffc6a9;
+  --color-orange-400: #ffaa7e;
+  --color-orange-500: #ff8c4a;
+  --color-orange-600: #da6e2b;
+  --color-orange-700: #b15212;
+  --color-orange-800: #843902;
+  --color-orange-900: #582401;
+  --color-orange: var(--color-orange-500);
+  --color-orange-soft: var(--color-orange-200);
+  --color-orange-ink: var(--color-orange-700);
+
+  /* ---------- Accent ---------- */
+  --color-lime: #c8ff59;
+  --color-lime-soft: #efffcf;
+
+  /* ---------- Semantic ---------- */
+  --color-area-artwork: var(--color-mint-500);
+  --color-area-social: var(--color-orange-500);
+  --color-area-conservation: var(--color-blue-500);
+  --color-highlight: var(--color-lime);
+  --color-status-ok: var(--color-mint-600);
+  --color-status-watch: var(--color-orange-300);
+  --color-status-action: var(--color-orange-600);
+
+  /* ---------- Typography ---------- */
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-weight-light: 300;
+  --font-weight-medium: 500;
+
+  /* text-* sets size + its line-height in one class (e.g. `text-body`). */
+  --text-micro: 12px;
+  --text-micro--line-height: 16px;
+  --text-caption: 14px;
+  --text-caption--line-height: 18px;
+  --text-body: 16px;
+  --text-body--line-height: 22px;
+  --text-lead: 20px;
+  --text-lead--line-height: 25px;
+  --text-title: 26px;
+  --text-title--line-height: 30px;
+  --text-headline: 34px;
+  --text-headline--line-height: 36px;
+  --text-display: 48px;
+  --text-display--line-height: 48px;
+  --text-hero: 88px;
+  --text-hero--line-height: 84px;
+
+  --leading-micro: 16px;
+  --leading-caption: 18px;
+  --leading-body: 22px;
+  --leading-lead: 25px;
+  --leading-title: 30px;
+  --leading-headline: 36px;
+  --leading-display: 48px;
+  --leading-hero: 84px;
+
+  --tracking-hero: -0.03em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.02em;
+
+  /* ---------- Radius ---------- */
+  --radius-none: 0px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  /* ---------- Layout ---------- */
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1440px;
+  --container-mobile: 375px;
+  --container-content: 720px;
+  --container-desktop: 1392px;
+}
+
+/* Plain custom properties (Tailwind has no opacity namespace). */
+:root {
+  --opacity-muted: 60%;
+  --opacity-disabled: 35%;
+}
