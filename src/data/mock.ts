@@ -120,13 +120,10 @@ export const survey = {
   reasons: ["The colours", "The subject", "The artist", "It fit my home", "A memory", "Just a feeling", "Someone suggested it"],
   changes: ["I notice details", "I visit museums more", "I talk about art more", "I feel more confident"],
   agree: ["Strongly disagree", "Disagree", "Not sure", "Agree", "Strongly agree"],
-  /** «Which one tempts you?» — other Artothek works. */
-  picks: [
-    { title: "Blauer Berg", artist: "Victor Surbek" },
-    { title: "Studie", artist: "C. L'Eplattenier" },
-    { title: "Blick vom Zürichberg", artist: "Balz Stäger" },
-  ],
-  totalWorks: 70,
+  /** «How many people see this artwork?» (single choice) */
+  viewers: ["Just me", "2–5 people", "6–10 people", "11–20 people", "More than 20"],
+  /** «What would you love to have on your walls next?» (multiple choice) */
+  nextThemes: ["Nature & Landscape", "People", "Portrait", "Animals", "Abstract Art", "Everyday Life", "Something Unexpected"],
 };
 
 export const conversations = {

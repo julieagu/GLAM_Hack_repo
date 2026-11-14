@@ -5,9 +5,9 @@ export interface RadarAxis {
 }
 
 interface RadarChartProps {
-  /** How others answered (average). Drawn as a smooth ink outline; labels show these %. */
+  /** How everyone else feels (average). Drawn as the filled shape; labels show these %. */
   axes: RadarAxis[];
-  /** Your answer, 0–1 per axis label. Drawn as a filled area-colour shape + legend. */
+  /** Your answer, 0–1 per axis label. Drawn as a dashed line + legend. */
   mine?: Record<string, number>;
   /** Accessible summary. Generated if omitted. */
   title?: string;
@@ -49,8 +49,8 @@ const radius = (v: number) => R * Math.max(v, 0.06);
 /**
  * Feelings spider graph (Social impact): white card, 3 grid rings + spokes (track colour).
  * Colours from Paper New_spidegrpah:
- * - Others: smooth orange-ink (orange-700) outline; labels with their % (top one ink, rest area ink).
- * - Mine (optional): smooth orange-300 fill, orange dot on my strongest emotion, legend underneath.
+ * - Everyone else (the average): smooth orange-300 filled shape; labels with their % (top one ink, rest area ink).
+ * - You (optional): smooth dashed orange-ink (orange-700) line, dot on your strongest emotion, legend underneath.
  */
 export function RadarChart({ axes, mine, title, blurred }: RadarChartProps) {
   const n = axes.length;
@@ -66,7 +66,7 @@ export function RadarChart({ axes, mine, title, blurred }: RadarChartProps) {
   const summary =
     title ??
     [
-      `Others: ${axes.map((a) => `${a.label} ${Math.round(a.value * 100)}%`).join(", ")}`,
+      `Everyone else: ${axes.map((a) => `${a.label} ${Math.round(a.value * 100)}%`).join(", ")}`,
       myValues && `You: ${axes.map((a, i) => `${a.label} ${Math.round(myValues[i] * 100)}%`).join(", ")}`,
     ]
       .filter(Boolean)
@@ -88,9 +88,11 @@ export function RadarChart({ axes, mine, title, blurred }: RadarChartProps) {
           return <line key={i} x1={CX} y1={CY} x2={x} y2={y} className="stroke-track" />;
         })}
 
-        {myShape && <path d={myShape} className="fill-orange-300" />}
-        <path d={others} className="fill-none stroke-orange-ink" strokeWidth={1.2} strokeLinejoin="round" />
-        {myValues && myValues[myTop] > 0 && <circle cx={mx} cy={my} r={3.1} className="fill-orange" />}
+        <path d={others} className="fill-orange-300" />
+        {myShape && (
+          <path d={myShape} className="fill-none stroke-orange-ink" strokeWidth={1.5} strokeDasharray="4 3" strokeLinejoin="round" strokeLinecap="round" />
+        )}
+        {myValues && myValues[myTop] > 0 && <circle cx={mx} cy={my} r={3.5} className="fill-orange-ink" />}
 
         {axes.map((a, i) => {
           const [x, y] = point(i, n, R + 9);
@@ -113,16 +115,19 @@ export function RadarChart({ axes, mine, title, blurred }: RadarChartProps) {
 
       {myValues && (
         <figcaption className="flex flex-col gap-1.5 text-area-ink">
-          <span className="text-caption">See how your answer compares to others</span>
+          <span className="text-caption">See how your feelings compare to everyone else's</span>
           <ul className="flex flex-col gap-1 text-micro">
             <li className="flex items-center gap-2">
-              Your answer <span className="h-1.5 w-6 bg-orange-300" aria-hidden="true" />
+              How everyone else feels <span className="h-1.5 w-6 bg-orange-300" aria-hidden="true" />
             </li>
             <li className="flex items-center gap-2">
-              How others answered <span className="h-0.5 w-6 bg-orange-ink" aria-hidden="true" />
+              How you feel{" "}
+              <svg width="24" height="4" aria-hidden="true">
+                <path d="M1 2H23" className="stroke-orange-ink" strokeWidth={1.5} strokeDasharray="4 3" strokeLinecap="round" />
+              </svg>
             </li>
             <li className="flex items-center gap-2">
-              Your strongest emotion <span className="size-2.5 rounded-pill bg-orange" aria-hidden="true" />
+              Your strongest feeling <span className="size-2.5 rounded-pill bg-orange-ink" aria-hidden="true" />
             </li>
           </ul>
         </figcaption>

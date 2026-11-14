@@ -4,7 +4,7 @@ import { Icon, SectionHeader } from "@/components/ui";
 import { project, team } from "@/data/team";
 import { teamPhoto } from "@/lib/assetImages";
 
-/** LinkedIn link, or a dashed placeholder pill until the URL is filled in src/data/team.ts. */
+/** LinkedIn link, or a dashed placeholder pill until the URL is filled in /data/team.ts. */
 function LinkedInLink({ name, url }: { name: string; url: string }) {
   const cls = "inline-flex h-8 items-center gap-1.5 self-start rounded-pill border border-ink px-3 text-caption";
   return url ? (
@@ -18,7 +18,21 @@ function LinkedInLink({ name, url }: { name: string; url: string }) {
   );
 }
 
-function TeamMember({ name, role, bio, linkedin }: (typeof team)[number]) {
+/** Website link, or a dashed placeholder pill until the URL is filled in /data/team.ts. */
+function WebsiteLink({ name, url }: { name: string; url: string }) {
+  const cls = "inline-flex h-8 items-center gap-1.5 self-start rounded-pill border border-ink px-3 text-caption";
+  return url ? (
+    <a href={url} target="_blank" rel="noreferrer" className={`${cls} hover:bg-ink/5`} aria-label={`${name}'s website (opens in a new tab)`}>
+      <Icon name="globe" size={16} /> Website ↗
+    </a>
+  ) : (
+    <span className={`${cls} border-dashed text-ink-muted`} aria-disabled="true" title="Website link coming soon">
+      <Icon name="globe" size={16} /> Website
+    </span>
+  );
+}
+
+function TeamMember({ name, role, bio, linkedin, website }: (typeof team)[number]) {
   const photo = teamPhoto(name);
   return (
     <li className="flex flex-col gap-2.5">
@@ -39,7 +53,10 @@ function TeamMember({ name, role, bio, linkedin }: (typeof team)[number]) {
         <span className="text-micro font-medium tracking-wide">{role}</span>
         <p className="text-caption leading-5 text-area-ink">{bio}</p>
       </div>
-      <LinkedInLink name={name} url={linkedin} />
+      <div className="flex flex-wrap gap-1.5">
+        <LinkedInLink name={name} url={linkedin} />
+        {website !== undefined && <WebsiteLink name={name} url={website} />}
+      </div>
     </li>
   );
 }
@@ -49,13 +66,11 @@ export default function About() {
     <div data-area="about">
       <MobileScreen>
         <PageTopBar />
-        <PageTitle title="About" lead={project.event} />
+        <PageTitle title="Welcome Home" lead={project.event} />
 
         <section className="flex flex-col gap-3 px-6 pb-10" aria-labelledby="project">
-          <SectionHeader title="The project" className="[&>div]:pb-0" />
-          <h2 id="project" className="text-title font-light">
-            {project.name}
-          </h2>
+          <SectionHeader title="The Life of an Artwork" className="[&>div]:pb-0" />
+
           {project.description.map((p) => (
             <p key={p} className="text-body">
               {p}
@@ -64,7 +79,7 @@ export default function About() {
         </section>
 
         <section className="flex flex-col gap-4 px-6 pb-10" aria-label="Team">
-          <SectionHeader title="The team" meta={`${team.length} people`} className="[&>div]:pb-0" />
+          <SectionHeader title="The team" className="[&>div]:pb-0" />
           <ul className="grid grid-cols-2 gap-x-3 gap-y-6">
             {team.map((m) => (
               <TeamMember key={m.name} {...m} />

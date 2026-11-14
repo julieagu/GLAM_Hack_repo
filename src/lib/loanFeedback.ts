@@ -12,8 +12,9 @@ export interface LoanFeedback {
   changes: string[];
   agreeArtInHomes: string | null;
   firstOriginal: "yes" | "no" | null;
-  hostAgain: "yes" | "maybe" | "not-now" | null;
-  wishlist: string[];
+  viewers: string | null;
+  /** Themes for the next artwork («What would you love to have on your walls next?»). */
+  nextThemes: string[];
   sentAt?: string;
 }
 
@@ -24,8 +25,8 @@ export const emptyFeedback: LoanFeedback = {
   changes: [],
   agreeArtInHomes: null,
   firstOriginal: null,
-  hostAgain: null,
-  wishlist: [],
+  viewers: null,
+  nextThemes: [],
 };
 
 let current: LoanFeedback | null = null;

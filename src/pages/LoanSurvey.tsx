@@ -9,11 +9,11 @@ import { formatDate, loanProgress } from "@/lib/loan";
 import { useArtworkImages } from "@/lib/useArtworkImages";
 
 const MAX_TEXT = 80;
-const QUESTIONS = 4;
+const QUESTIONS = 5;
 
 /**
  * End-of-loan feedback (Paper: Mobile/Social/Survey 0 → 5), opened from the loan card.
- * 0 Intro · 1 Why this artwork · 2 Looking at art · 3 Art beyond museums · 4 Host another · 5 Thank you.
+ * 0 Intro · 1 Why this artwork · 2 Looking at art · 3 Art beyond museums · 4 Who sees it · 5 Walls next · 6 Thank you.
  * Every question can be skipped; answers are anonymous.
  */
 export default function LoanSurvey() {
@@ -23,7 +23,7 @@ export default function LoanSurvey() {
   const [thumb] = useArtworkImages(art.title, 200);
 
   const set = <K extends keyof LoanFeedback>(k: K, v: LoanFeedback[K]) => setA((p) => ({ ...p, [k]: v }));
-  const toggleIn = (k: "reasons" | "changes" | "wishlist", v: string) =>
+  const toggleIn = (k: "reasons" | "changes" | "nextThemes", v: string) =>
     setA((p) => ({ ...p, [k]: p[k].includes(v) ? p[k].filter((x) => x !== v) : [...p[k], v] }));
 
   const close = () => navigate("/artwork");
@@ -54,7 +54,7 @@ export default function LoanSurvey() {
               Your loan ends in {daysLeft} {daysLeft === 1 ? "day" : "days"}
             </span>
             <h1 className="pt-4 text-display font-light tracking-tight">My Time With You</h1>
-            <p className="pt-3 text-lead text-area-ink">Four quick questions before your [art.title] returns to the collection.</p>
+            <p className="pt-3 text-lead text-area-ink">Four quick questions before your {art.title} returns to the collection.</p>
             <div className="mt-7 flex items-center gap-3.5 rounded-md bg-white p-3.5">
               <div className="h-18 w-14 shrink-0 rounded-sm bg-stone bg-cover bg-center" style={thumb ? { backgroundImage: `url(${thumb})` } : undefined} />
               <div className="flex flex-col gap-0.5">
@@ -187,21 +187,28 @@ export default function LoanSurvey() {
         )}
 
         {step === 4 && (
-          <Question eyebrow="What's next" title="Would you like to host another artwork?">
-            <Segmented
-              value={a.hostAgain}
-              onChange={(v) => set("hostAgain", v as LoanFeedback["hostAgain"])}
-              options={[
-                { value: "yes", label: "Yes" },
-                { value: "maybe", label: "Maybe" },
-                { value: "not-now", label: "Not now" },
-              ]}
-            />
-            {a.hostAgain !== "not-now" && <Picks selected={a.wishlist} onToggle={(t) => toggleIn("wishlist", t)} />}
+          <Question
+            eyebrow="Who sees it"
+            title={`How many people see ${art.title}?`}
+            helper="Family, flatmates, friends, visitors: everyone who passes by."
+          >
+            <RadioList label="How many people see this artwork?" options={survey.viewers} value={a.viewers} onChange={(v) => set("viewers", v)} />
           </Question>
         )}
 
-        {done && <ThankYou wishlist={a.wishlist} />}
+        {step === 5 && (
+          <Question eyebrow="What's next" title="What would you love to have on your walls next?" helper="Pick as many as you like.">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Themes">
+              {survey.nextThemes.map((t) => (
+                <Chip key={t} selected={a.nextThemes.includes(t)} onClick={() => toggleIn("nextThemes", t)}>
+                  {t}
+                </Chip>
+              ))}
+            </div>
+          </Question>
+        )}
+
+        {done && <ThankYou themes={a.nextThemes} />}
       </div>
 
       {/* Bottom actions */}
@@ -274,46 +281,43 @@ function Segmented({
   );
 }
 
-function PickTile({ title, artist, selected, onToggle }: { title: string; artist: string; selected: boolean; onToggle: () => void }) {
-  const [img] = useArtworkImages(title, 300);
+/** Single-choice list: ring radio + label, one row per option (same look as question 3). */
+function RadioList({
+  label,
+  options,
+  value,
+  onChange,
+}: {
+  label: string;
+  options: string[];
+  value: string | null;
+  onChange: (v: string) => void;
+}) {
   return (
-    <button type="button" aria-pressed={selected} onClick={onToggle} className="flex flex-1 flex-col gap-1.5 text-left">
-      <span
-        className={cn("relative h-[150px] w-full rounded-md bg-stone bg-cover bg-center", selected && "shadow-[inset_0_0_0_3px_var(--color-ink)]")}
-        style={img ? { backgroundImage: `url(${img})` } : undefined}
-      >
-        {selected && (
-          <span className="absolute top-2 right-2 flex size-6 items-center justify-center rounded-pill bg-ink text-area">
-            <Icon name="check" size={12} strokeWidth={2.4} />
-          </span>
-        )}
-      </span>
-      <span className="text-micro font-medium">
-        {title}
-        <br />
-        <span className="font-light">{artist}</span>
-      </span>
-    </button>
+    <div className="flex flex-col border-b border-line" role="radiogroup" aria-label={label}>
+      {options.map((opt) => {
+        const on = value === opt;
+        return (
+          <button
+            key={opt}
+            type="button"
+            role="radio"
+            aria-checked={on}
+            onClick={() => onChange(opt)}
+            className="flex h-[42px] items-center gap-3 border-t border-line text-left text-body"
+          >
+            <span className={cn("flex size-5 shrink-0 items-center justify-center rounded-pill", on ? "bg-ink" : "border-[1.5px] border-ink")}>
+              {on && <span className="size-2 rounded-pill bg-area" />}
+            </span>
+            <span className={on ? "font-medium" : undefined}>{opt}</span>
+          </button>
+        );
+      })}
+    </div>
   );
 }
 
-function Picks({ selected, onToggle }: { selected: string[]; onToggle: (title: string) => void }) {
-  return (
-    <>
-      <div className="flex items-baseline justify-between pt-7 pb-3">
-        <span className="text-lead">Which one tempts you?</span>
-        <span className="text-micro text-area-ink underline underline-offset-[3px]">See all {survey.totalWorks}</span>
-      </div>
-      <div className="flex gap-2">
-        {survey.picks.map((p) => (
-          <PickTile key={p.title} {...p} selected={selected.includes(p.title)} onToggle={() => onToggle(p.title)} />
-        ))}
-      </div>
-    </>
-  );
-}
-
-function ThankYou({ wishlist }: { wishlist: string[] }) {
+function ThankYou({ themes }: { themes: string[] }) {
   return (
     <div className="flex flex-col">
       <span className="flex size-16 items-center justify-center rounded-pill bg-ink text-area" aria-hidden="true">
@@ -332,16 +336,14 @@ function ThankYou({ wishlist }: { wishlist: string[] }) {
           </span>
           <Icon name="chevron-right" />
         </Link>
-        {wishlist.length > 0 && (
+        {themes.length > 0 && (
           <div className="flex items-center gap-3 rounded-md bg-white px-4 py-3.5">
             <span className="flex size-9 shrink-0 items-center justify-center rounded-pill bg-area-soft">
               <Icon name="heart" size={16} />
             </span>
             <span className="flex min-w-0 flex-1 flex-col">
-              <span className="text-body">
-                {wishlist.join(", ")} {wishlist.length === 1 ? "is" : "are"} on your list
-              </span>
-              <span className="text-micro text-ink-muted">We'll let you know when it's free</span>
+              <span className="text-body">Next on your walls: {themes.join(", ")}</span>
+              <span className="text-micro text-ink-muted">We'll suggest matching works for your next loan</span>
             </span>
           </div>
         )}
