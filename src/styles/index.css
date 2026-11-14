@@ -24,6 +24,50 @@
  */
 @custom-variant desk (@media (width >= 64rem));
 
+/* Feelings survey slider: ink-outlined track filled up to the value (--fill), 28px ink thumb. */
+.feel-slider {
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+}
+.feel-slider::-webkit-slider-runnable-track {
+  height: 10px;
+  border: 1px solid var(--color-ink);
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-ink) var(--fill, 0%), var(--color-surface-translucent) var(--fill, 0%));
+}
+.feel-slider::-moz-range-track {
+  height: 10px;
+  border: 1px solid var(--color-ink);
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-ink) var(--fill, 0%), var(--color-surface-translucent) var(--fill, 0%));
+}
+.feel-slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 28px;
+  height: 28px;
+  margin-top: -10px;
+  border-radius: 999px;
+  background: var(--color-ink);
+  border: 3px solid var(--color-white);
+  box-shadow: 0 0 0 1px var(--color-ink);
+}
+.feel-slider::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: var(--color-ink);
+  border: 3px solid var(--color-white);
+  box-shadow: 0 0 0 1px var(--color-ink);
+}
+.feel-slider:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
 /* Conversation deck: the decided card flies off from where the finger left it. */
 @keyframes card-fly {
   from {
@@ -59,6 +103,13 @@
   --area-strong: var(--color-blue-700);
   --area-ink: var(--color-blue-900);
 }
+/* About page: Artothek pink (the highlight colour), not one of the 3 content areas. */
+[data-area="about"] {
+  --area: var(--color-pink);
+  --area-soft: var(--color-pink-soft);
+  --area-strong: var(--color-ink);
+  --area-ink: var(--color-ink-muted);
+}
 
 @layer base {
   html {
@@ -76,6 +127,7 @@
   html:has([data-area="artwork"]) { background: var(--color-mint-500); }
   html:has([data-area="social"]) { background: var(--color-orange-500); }
   html:has([data-area="conservation"]) { background: var(--color-blue-500); }
+  html:has([data-area="about"]) { background: var(--color-pink); }
   @media (width >= 48rem) {
     html:has([data-area]) { background: var(--color-stone); }
   }

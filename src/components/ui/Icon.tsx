@@ -56,6 +56,12 @@ const paths = {
       <circle cx="12" cy="13" r="3.5" />
     </g>
   ),
+  linkedin: (
+    <g strokeWidth="1.5">
+      <rect x="3.5" y="3.5" width="17" height="17" rx="3" />
+      <path d="M8 10.5V16M8 7.8v.1M11.5 16v-5.5M11.5 13c0-1.7 1-2.6 2.3-2.6s2.2.9 2.2 2.6V16" />
+    </g>
+  ),
   instagram: (
     <g strokeWidth="1.5">
       <rect x="3.5" y="3.5" width="17" height="17" rx="5" />

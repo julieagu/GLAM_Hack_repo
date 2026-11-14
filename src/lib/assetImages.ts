@@ -35,3 +35,15 @@ function toList(files: Record<string, string>): AssetImage[] {
 
 export const creativityWorkImages = toList(creativity);
 export const instagramImages = toList(instagramPics);
+
+const teamPics = import.meta.glob<string>("/src/assets/team/*.{jpg,jpeg,png,webp,avif,JPG,JPEG,PNG}", {
+  eager: true,
+  import: "default",
+});
+
+/** Team photo for a first name («Julie» → src/assets/team/julie.jpg), or undefined. */
+export function teamPhoto(name: string): string | undefined {
+  const key = name.toLowerCase();
+  const path = Object.keys(teamPics).find((p) => p.split("/").pop()!.replace(/\.[^.]+$/, "").toLowerCase() === key);
+  return path ? teamPics[path] : undefined;
+}

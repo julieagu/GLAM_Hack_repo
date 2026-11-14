@@ -1,10 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
+import About from "@/pages/About";
 import ArtworkInfo from "@/pages/ArtworkInfo";
 import Conservation from "@/pages/Conservation";
 import Conversations from "@/pages/Conversations";
 import CreativeCamera from "@/pages/CreativeCamera";
 import DesignSystem from "@/pages/DesignSystem";
 import ErrorPage from "@/pages/ErrorPage";
+import FeelingsSurvey from "@/pages/FeelingsSurvey";
 import Home from "@/pages/Home";
 import InstagramRedirect from "@/pages/InstagramRedirect";
 import LoanSurvey from "@/pages/LoanSurvey";
@@ -30,11 +32,12 @@ const router = createBrowserRouter(
         { path: "/social", element: <SocialImpact /> },
         { path: "/social/conversations", element: <Conversations /> },
         { path: "/social/stories", element: <Stories /> },
+        { path: "/social/feelings", element: <FeelingsSurvey /> },
         { path: "/social/creativity-work/camera", element: <CreativeCamera /> },
         { path: "/social/instagram", element: <InstagramRedirect /> },
         { path: "/contact", element: <Placeholder title="Contact" /> },
-        { path: "/qa", element: <Placeholder title="Q&A" /> },
-        { path: "/about", element: <Placeholder title="About" /> },
+        // Q&A lives on opendata.ch (footer link opens it in a new tab).
+        { path: "/about", element: <About /> },
         // Staff dashboard (desktop + mobile), opened from the footer «Dashboard» tab
         { path: "/staff", element: <StaffOverview /> },
         { path: "/staff/artworks", element: <StaffArtwork /> },

@@ -1,5 +1,6 @@
 // Staff › Overview (Paper: Desktop/Staff/Overview + Mobile/Staff/Overview).
 import { Link } from "react-router";
+import artothekLogo from "@/assets/logo/artothek-logo.svg";
 import { ConversationsChart, LoansPerMonthChart, MeterRow, RangeRow, SensorStatusBar } from "@/components/staff/charts";
 import {
   AreaTile,
@@ -21,7 +22,20 @@ export default function StaffOverview() {
   return (
     <StaffShell>
       <StaffTitle
-        title="Artothek overview"
+        title={
+          // The ARTOTHEK sticker logo stands in for the word "Artothek".
+          // Tilted left like a stuck-on sticker (Home tilts it right).
+          <span className="flex flex-wrap items-end gap-x-4 gap-y-2 pt-5 desk:gap-x-6 desk:pt-3">
+            <img
+              src={artothekLogo}
+              alt="Artothek"
+              width={125}
+              height={52}
+              className="h-[72px] w-auto origin-bottom-left -rotate-[8deg] drop-shadow-[2px_3px_0_var(--color-ink)] desk:h-[112px]"
+            />
+            overview
+          </span>
+        }
         actions={
           // TODO: real report export.
           <button type="button" className="hidden h-[42px] items-center rounded-pill border border-ink px-4.5 text-caption hover:bg-ink/5 desk:flex">

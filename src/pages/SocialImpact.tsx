@@ -5,6 +5,7 @@ import { Button, Card, Icon, List, PendingQuestionRow, QARow, RadarChart, Sectio
 import { conversations, faq, featuredArtwork as art, feelings, inspiration, instagram, stories } from "@/data/mock";
 import { creativityWorkImages, instagramImages } from "@/lib/assetImages";
 import { useCreativeWorks } from "@/lib/creativeWorks";
+import { useMyFeelings, withMyAnswer } from "@/lib/myFeelings";
 import { useMyQuestions } from "@/lib/myQuestions";
 import { useRotatingIndex } from "@/lib/useRotatingStory";
 
@@ -14,6 +15,7 @@ export default function SocialImpact() {
   // A different borrower story each time the page is opened.
   const story = stories[useRotatingIndex(stories.length)];
   const { works: myWorks } = useCreativeWorks();
+  const myFeelings = useMyFeelings();
   const gallery = [
     ...myWorks.map((w) => ({ key: w.id, url: w.imageUrl, label: w.author })),
     ...creativityWorkImages.map((a) => ({ key: a.url, url: a.url, label: a.label })),
@@ -61,15 +63,26 @@ export default function SocialImpact() {
         </Card>
       </section>
 
-      <section className="flex flex-col gap-3 px-6 pb-10">
+      <section id="feelings" className="flex scroll-mt-4 flex-col gap-3 px-6 pb-10">
         <SectionHeader title="How it makes people feel" className="[&>div]:pb-0" />
         <p className="text-caption leading-5 text-area-ink">
-          Answers from {feelings.respondents} borrowers to «{feelings.question}»
+          Answers from {feelings.respondents + (myFeelings ? 1 : 0)} borrowers to «{feelings.question}»
         </p>
-        <RadarChart axes={feelings.axes} />
-        <Button variant="secondary" size="sm" block>
-          Add how you feel
-        </Button>
+        {/* Your answer (if any) is already counted in the average. */}
+        <RadarChart axes={withMyAnswer(feelings.axes, feelings.respondents, myFeelings)} />
+        {myFeelings ? (
+          <p className="flex items-center gap-1.5 text-caption" role="status">
+            <Icon name="check" size={14} /> Your feelings are in the chart
+            {myFeelings.word && <span className="text-area-ink">· «{myFeelings.word}»</span>}
+          </p>
+        ) : (
+          <Link
+            to="/social/feelings"
+            className="flex h-11 items-center justify-center rounded-pill border border-ink text-body hover:bg-ink/5"
+          >
+            Add how you feel
+          </Link>
+        )}
       </section>
 
       <section id="creativity-work" className="flex scroll-mt-4 flex-col gap-3 px-6 pb-10">
