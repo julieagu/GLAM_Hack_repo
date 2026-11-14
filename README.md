@@ -60,3 +60,9 @@ Breakpoints follow the DS: `sm` 375, `md` 768, `lg` 1440.
 - Mobile screens: white cards on the area colour; primary button = ink fill with the area colour as label; footer tabs always white.
 - Desktop: full-bleed area tiles, radius 0, outlined pills.
 - Component names match the Paper layer names (e.g. `SectionHeader`, `SensorTile`, `StepHeader`).
+
+## License
+
+The code is released under the [MIT License](LICENSE).
+
+This covers the source code only. Artwork images and collection data are loaded at runtime from the SKKG (Stiftung für Kunst, Kultur und Geschichte) and remain under their own terms; the SKKG logo in `public/` is the foundation's trademark and is not covered by the MIT License.
