@@ -1,7 +1,7 @@
 import { useState, type CSSProperties, type ReactNode } from "react";
 import { Link, useNavigate } from "react-router";
 import { MobileScreen, StepHeader } from "@/components/layout";
-import { Button, Chip, Icon, RadarChart } from "@/components/ui";
+import { Button, Chip, Icon } from "@/components/ui";
 import { featuredArtwork as art, feelings } from "@/data/mock";
 import { saveMyFeelings } from "@/lib/myFeelings";
 import { useArtworkImages } from "@/lib/useArtworkImages";
@@ -125,10 +125,8 @@ export default function FeelingsSurvey() {
               <Icon name="heart" size={28} />
             </span>
             <h1 className="pt-5 text-display font-light tracking-tight">Thank you</h1>
-            <p className="pt-2 pb-4 text-lead text-area-ink">This is how I make you feel{word.trim() ? `: «${word.trim()}»` : "."}</p>
-            <div className="rounded-md bg-surface-translucent px-2 py-3">
-              <RadarChart axes={feelings.axes.map((a) => ({ label: a.label, value: values[a.label] / 100 }))} />
-            </div>
+            <p className="pt-2 pb-5 text-lead text-area-ink">This is how I make you feel.</p>
+            <AnswerRecap values={values} word={word.trim()} />
           </div>
         )}
       </div>
@@ -156,6 +154,43 @@ export default function FeelingsSurvey() {
         )}
       </div>
     </MobileScreen>
+  );
+}
+
+/** Thank-you recap: your answers as keywords (strongest first), no chart — that's revealed on Social impact. */
+function AnswerRecap({ values, word }: { values: Record<string, number>; word: string }) {
+  const felt = feelings.axes
+    .map((a) => ({ label: a.label, value: values[a.label] }))
+    .filter((f) => f.value > 0)
+    .sort((a, b) => b.value - a.value);
+
+  return (
+    <div className="flex flex-col gap-4 rounded-md bg-surface p-5">
+      <div className="flex flex-col gap-2.5">
+        <span className="text-micro tracking-wide text-area-ink">You feel</span>
+        {felt.length ? (
+          <ul className="flex flex-wrap gap-2">
+            {felt.map((f, i) => (
+              <li
+                key={f.label}
+                className={`flex h-9 items-center gap-1.5 rounded-pill border border-ink px-3.5 text-body ${i === 0 ? "bg-ink text-area" : ""}`}
+              >
+                {f.label}
+                <span className={i === 0 ? "text-micro" : "text-micro text-ink-muted"}>· {strength(f.value).toLowerCase()}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <span className="text-body text-ink-muted">No emotions picked</span>
+        )}
+      </div>
+      {word && (
+        <div className="flex flex-col gap-1 border-t border-line pt-4">
+          <span className="text-micro tracking-wide text-area-ink">In one word</span>
+          <span className="text-title font-light">«{word}»</span>
+        </div>
+      )}
+    </div>
   );
 }
 

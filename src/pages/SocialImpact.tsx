@@ -5,7 +5,7 @@ import { Button, Card, Icon, List, PendingQuestionRow, QARow, RadarChart, Sectio
 import { conversations, faq, featuredArtwork as art, feelings, inspiration, instagram, stories } from "@/data/mock";
 import { creativityWorkImages, instagramImages } from "@/lib/assetImages";
 import { useCreativeWorks } from "@/lib/creativeWorks";
-import { useMyFeelings, withMyAnswer } from "@/lib/myFeelings";
+import { useMyFeelings } from "@/lib/myFeelings";
 import { useMyQuestions } from "@/lib/myQuestions";
 import { useRotatingIndex } from "@/lib/useRotatingStory";
 
@@ -66,22 +66,30 @@ export default function SocialImpact() {
       <section id="feelings" className="flex scroll-mt-4 flex-col gap-3 px-6 pb-10">
         <SectionHeader title="How it makes people feel" className="[&>div]:pb-0" />
         <p className="text-caption leading-5 text-area-ink">
-          Answers from {feelings.respondents + (myFeelings ? 1 : 0)} borrowers to «{feelings.question}»
+          Answers from {feelings.respondents} borrowers to «{feelings.question}»
         </p>
-        {/* Your answer (if any) is already counted in the average. */}
-        <RadarChart axes={withMyAnswer(feelings.axes, feelings.respondents, myFeelings)} />
         {myFeelings ? (
-          <p className="flex items-center gap-1.5 text-caption" role="status">
-            <Icon name="check" size={14} /> Your feelings are in the chart
-            {myFeelings.word && <span className="text-area-ink">· «{myFeelings.word}»</span>}
-          </p>
+          <>
+            {/* Revealed after the survey: your answer (filled) against how others answered (outline). */}
+            <RadarChart axes={feelings.axes} mine={myFeelings.values} />
+            <p className="flex items-center gap-1.5 text-caption" role="status">
+              <Icon name="check" size={14} /> Your feelings are in the chart
+              {myFeelings.word && <span className="text-area-ink">· «{myFeelings.word}»</span>}
+            </p>
+          </>
         ) : (
-          <Link
-            to="/social/feelings"
-            className="flex h-11 items-center justify-center rounded-pill border border-ink text-body hover:bg-ink/5"
-          >
-            Add how you feel
-          </Link>
+          // Locked: the chart is blurred until you add how you feel.
+          <div className="relative">
+            <RadarChart axes={feelings.axes} blurred />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <Link
+                to="/social/feelings"
+                className="flex h-12 items-center gap-2 rounded-pill bg-ink px-6 text-body text-area shadow-[0_6px_20px_-6px_var(--color-ink)] hover:bg-ink-soft"
+              >
+                <Icon name="plus" size={18} /> How you feel
+              </Link>
+            </div>
+          </div>
         )}
       </section>
 
