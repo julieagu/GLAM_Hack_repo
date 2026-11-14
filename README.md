@@ -13,11 +13,21 @@ Vite · React 19 · TypeScript · Tailwind CSS v4 · React Router 7. Artwork dat
 
 ## Getting started
 
+From the `1_code` folder, go into the project first:
+
 ```bash
-npm install
+cd GLAM_Hack_repo
+```
+
+Then:
+
+```bash
+npm install        # first time only
 npm run dev        # http://localhost:5173
 npm run build      # type-check + production build
 ```
+
+> **Windows PowerShell 5.1:** `&&` doesn't work there (« Le jeton && n'est pas un séparateur d'instruction valide »). Run commands one per line, or chain them with `;` — e.g. `cd GLAM_Hack_repo; npm run dev`. All the `npm run …` scripts work in any shell.
 
 ## Deploy
 
@@ -27,14 +37,14 @@ Every push to `main` builds the app and publishes it to GitHub Pages (`.github/w
 One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
 How it works on a static host:
-- The Pages build sets `GITHUB_PAGES=true`, so Vite and the router use the `/GLAM_Hack_repo/` base path. Local `npm run dev` stays at `/`.
+- The Pages build (`npm run build:pages`, or `GITHUB_PAGES=true` in CI) uses the `/GLAM_Hack_repo/` base path for Vite and the router. Local `npm run dev` stays at `/`.
 - `npm run build` also writes `dist/404.html` (a copy of `index.html`), so refreshing or sharing a deep link like `/social/conversations` still opens the app.
 - Reference public files with `import.meta.env.BASE_URL` (e.g. the SKKG logo), never with a leading `/`.
 
 Test the Pages build locally:
 
 ```bash
-GITHUB_PAGES=true npm run build && npm run preview -- --base /GLAM_Hack_repo/
+npm run preview:pages    # then open http://localhost:4173/GLAM_Hack_repo/
 ```
 
 Useful routes: `/` home · `/artwork` · `/social` · `/conservation` · `/staff` · `/design-system` (living style guide).

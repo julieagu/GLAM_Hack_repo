@@ -2,11 +2,14 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import ArtworkInfo from "@/pages/ArtworkInfo";
 import Conservation from "@/pages/Conservation";
 import Conversations from "@/pages/Conversations";
+import CreativeCamera from "@/pages/CreativeCamera";
 import DesignSystem from "@/pages/DesignSystem";
 import Home from "@/pages/Home";
+import InstagramRedirect from "@/pages/InstagramRedirect";
 import Placeholder from "@/pages/Placeholder";
 import SocialImpact from "@/pages/SocialImpact";
 import StaffDashboard from "@/pages/StaffDashboard";
+import Stories from "@/pages/Stories";
 
 const router = createBrowserRouter([
   // Borrower app (mobile)
@@ -15,6 +18,9 @@ const router = createBrowserRouter([
   { path: "/conservation", element: <Conservation /> },
   { path: "/social", element: <SocialImpact /> },
   { path: "/social/conversations", element: <Conversations /> },
+  { path: "/social/stories", element: <Stories /> },
+  { path: "/social/creativity-work/camera", element: <CreativeCamera /> },
+  { path: "/social/instagram", element: <InstagramRedirect /> },
   { path: "/contact", element: <Placeholder title="Contact" /> },
   { path: "/qa", element: <Placeholder title="Q&A" /> },
   { path: "/about", element: <Placeholder title="About" /> },

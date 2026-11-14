@@ -9,6 +9,8 @@
     "build": "tsc -b && vite build",
     "postbuild": "node -e \"require('fs').copyFileSync('dist/index.html','dist/404.html')\"",
     "preview": "vite preview",
+    "build:pages": "tsc -b && vite build --mode pages && npm run postbuild",
+    "preview:pages": "npm run build:pages && vite preview --mode pages",
     "typecheck": "tsc -b"
   },
   "dependencies": {

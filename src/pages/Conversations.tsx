@@ -1,7 +1,7 @@
-import { useRef, useState, type CSSProperties, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent } from "react";
 import { Link, useNavigate } from "react-router";
 import { MobileScreen } from "@/components/layout";
-import { Button, Icon, IconButton } from "@/components/ui";
+import { Icon, IconButton } from "@/components/ui";
 import { conversationPrompts as prompts, featuredArtwork as art, type ConversationPrompt } from "@/data/mock";
 import { cn } from "@/lib/cn";
 import { useArtworkImages } from "@/lib/useArtworkImages";
@@ -30,8 +30,8 @@ interface Flyer {
 /**
  * Conversation card deck (Paper: Mobile/Social/Conversation card).
  * Full screen, never scrolls. One prompt at a time:
- *   Pass      — button or swipe left:  card flies off to the left
- *   We talked — button or swipe right: card flies off to the right, note + keywords saved
+ *   Pass — swipe left (or ← / tap «Pass»):  card flies off to the left
+ *   Done — swipe right (or → / tap «Done»): card flies off to the right, note + keywords saved
  * The cards behind move up into place as the top card leaves.
  */
 export default function Conversations() {
@@ -71,6 +71,20 @@ export default function Conversations() {
     setDraft("");
     setDragX(0);
   }
+
+  // Keyboard: ← pass, → done (ignored while typing in a field).
+  const decideRef = useRef(decide);
+  decideRef.current = decide;
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const t = e.target as HTMLElement;
+      if (t.tagName === "INPUT" || t.tagName === "TEXTAREA") return;
+      if (e.key === "ArrowLeft") decideRef.current("passed");
+      if (e.key === "ArrowRight") decideRef.current("talked");
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
 
   const toggle = (k: string) => setSelected((s) => (s.includes(k) ? s.filter((x) => x !== k) : [...s, k]));
 
@@ -203,8 +217,20 @@ export default function Conversations() {
         </div>
       </div>
 
-      {/* Response: optional one-liner + keywords */}
-      <div className="flex flex-col gap-2.5 px-6 pt-5">
+      {/* Swipe caption, right under the card — no buttons. The two ends stay tappable
+          (and keyboard-focusable) as a fallback for people who can't swipe; ← / → keys work too. */}
+      <div className="flex items-center justify-between px-6 pt-2 text-caption">
+        <button type="button" disabled={!card} onClick={() => decide("passed")} className="flex items-center gap-1.5 py-2 pr-3" aria-label="Pass this card">
+          <Icon name="arrow-right" size={14} className="rotate-180" /> Pass
+        </button>
+        <span className="text-micro text-area-ink">Swipe the card</span>
+        <button type="button" disabled={!card} onClick={() => decide("talked")} className="flex items-center gap-1.5 py-2 pl-3" aria-label="Done, we talked">
+          Done <Icon name="arrow-right" size={14} />
+        </button>
+      </div>
+
+      {/* Response: optional one-liner + keywords — last block, sits above the home indicator */}
+      <div className="flex flex-col gap-2.5 px-6 pt-3 pb-[max(env(safe-area-inset-bottom),28px)] [@media(max-height:700px)]:pb-4">
         <div className="flex items-baseline justify-between">
           <label htmlFor="note" className="text-caption">
             What came up?
@@ -263,16 +289,6 @@ export default function Conversations() {
             ))}
         </div>
       </div>
-
-      {/* Actions */}
-      <div className="flex gap-2 px-6 pt-5 pb-[max(env(safe-area-inset-bottom),34px)] [@media(max-height:700px)]:pb-5">
-        <Button variant="secondary" size="lg" className="flex-1" disabled={!card} onClick={() => decide("passed")} iconEnd={<Icon name="arrow-right" />}>
-          Pass
-        </Button>
-        <Button size="lg" className="flex-[1.4]" disabled={!card} onClick={() => decide("talked")} iconStart={<Icon name="check" />}>
-          We talked
-        </Button>
-      </div>
     </MobileScreen>
   );
 }
@@ -303,7 +319,7 @@ function CardFace({ prompt, thumb }: { prompt: ConversationPrompt; thumb?: strin
   );
 }
 
-/** «We talked» / «Pass» labels that fade in as the card is dragged right / left. */
+/** «Done» / «Pass» labels that fade in as the card is dragged right / left. */
 function SwipeStamps({ dragX }: { dragX: number }) {
   const right = Math.min(1, Math.max(0, dragX / SWIPE_THRESHOLD));
   const left = Math.min(1, Math.max(0, -dragX / SWIPE_THRESHOLD));
@@ -314,14 +330,14 @@ function SwipeStamps({ dragX }: { dragX: number }) {
         style={{ opacity: right }}
         aria-hidden="true"
       >
-        ✓ We talked
+        ✓ Done
       </span>
       <span
         className="pointer-events-none absolute top-6 right-6 rotate-12 rounded-pill border border-ink bg-white px-3 py-1 text-caption"
         style={{ opacity: left }}
         aria-hidden="true"
       >
-        Pass →
+        ← Pass
       </span>
     </>
   );

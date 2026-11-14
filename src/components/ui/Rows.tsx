@@ -87,6 +87,37 @@ export function PersonRow({ name, note, date, initial, isCurrentUser }: PersonRo
   );
 }
 
+/** Q&A row: tap the question to open / close the answer. Chevron turns down when open. */
+export function QARow({ question, children }: { question: ReactNode; children: ReactNode }) {
+  return (
+    <details className="group">
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-3.5 text-body hover:bg-ink/5 [&::-webkit-details-marker]:hidden">
+        {question}
+        <Icon
+          name="chevron-right"
+          size={16}
+          strokeWidth={1.5}
+          className="shrink-0 transition-transform group-open:rotate-90 motion-reduce:transition-none"
+        />
+      </summary>
+      <div className="pb-4 text-body text-ink">{children}</div>
+    </details>
+  );
+}
+
+/** A question someone asked that has no answer yet. */
+export function PendingQuestionRow({ question, note }: { question: ReactNode; note?: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1 py-3.5">
+      <div className="flex items-start justify-between gap-3">
+        <span className="text-body">{question}</span>
+        <span className="mt-0.5 shrink-0 rounded-pill border border-dashed border-ink px-2.5 py-[3px] text-micro">Pending</span>
+      </div>
+      {note && <span className="text-micro text-area-ink">{note}</span>}
+    </div>
+  );
+}
+
 /** Navigation row (Q&A): whole row is the link, chevron right. */
 export function NavRow({ to, children }: { to: string; children: ReactNode }) {
   return (

@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { cn } from "@/lib/cn";
 
 const tabs = [
-  { to: "/contact", label: "Contact" },
+  { to: "/ARTOTHEK", label: "ARTOTHEK" },
   { to: "/qa", label: "Q&A" },
   { to: "/about", label: "About" },
 ];

@@ -93,8 +93,68 @@ export const handlingRules: { kind: "do" | "dont"; text: string }[] = [
 
 export const conversations = {
   count: 23,
-  featured: { quote: "«My grandmother grew tulips like these. We talked about her garden for an hour.»", author: "Lena, Töss" },
 };
+
+export interface Story {
+  id: string;
+  /** Headline on the stories page. */
+  title: string;
+  /** Short version shown on the Social impact card. */
+  quote: string;
+  /** Full story, shown on the stories page («Read more»). */
+  full: string[];
+  author: string;
+  /** When they had the painting. */
+  period: string;
+}
+
+// One of these is shown at random each time someone opens Social impact.
+export const stories: Story[] = [
+  {
+    id: "grandmother",
+    title: "Grandma's tulip garden",
+    quote: "«My grandmother grew tulips like these. We talked about her garden for an hour.»",
+    full: [
+      "My grandmother grew tulips like these behind her house in Töss. When my mother saw the painting in our hallway, she stopped and started telling us about that garden.",
+      "We sat in the kitchen for an hour. My kids had never heard those stories. Now they call it «grandma's painting».",
+    ],
+    author: "Lena, Töss",
+    period: "Since Jul 2026",
+  },
+  {
+    id: "kitchen",
+    title: "Breakfast with the tulips",
+    quote: "«It hung above our kitchen table. Breakfast became the time we talked about it.»",
+    full: [
+      "We put it above the kitchen table because that's where we spend the most time. Every morning someone noticed something new: the blue ribbon, the crack in the pot, the way one tulip bends down.",
+      "By the end of the loan my son could draw it from memory. We were sad to bring it back.",
+    ],
+    author: "Marco, Altstadt",
+    period: "Jan–Jul 2026",
+  },
+  {
+    id: "neighbour",
+    title: "The neighbour who painted again",
+    quote: "«Our neighbour came for coffee and stayed to talk about painting for the whole afternoon.»",
+    full: [
+      "Our neighbour used to paint when she was young. She saw the tulips through the window and knocked on the door to ask about them.",
+      "She stayed the whole afternoon and showed us how Barraud built up the petals with thick paint. Last week she started painting again.",
+    ],
+    author: "Anouk, Veltheim",
+    period: "Spring 2026",
+  },
+  {
+    id: "first-original",
+    title: "My first original",
+    quote: "«I never thought I would have an original painting at home. It changed how I look at museums.»",
+    full: [
+      "I always felt a bit out of place in museums. Living with one painting for months was different: no rush, no guard, just the tulips and me.",
+      "When I visited the Kunstmuseum afterwards, I stood in front of the still lifes for a long time. I knew what to look for now.",
+    ],
+    author: "Samir, Wülflingen",
+    period: "Spring 2026",
+  },
+];
 
 export interface ConversationPrompt {
   id: string;
@@ -109,10 +169,10 @@ export const conversationPrompts: ConversationPrompt[] = [
   { id: "room", category: "Home", prompt: "Which room did you choose for it, and why there?", keywords: ["Kitchen", "Living room", "Light"] },
   { id: "loved", category: "Memories", prompt: "Who in your life would have loved these tulips?", keywords: ["Family", "Gardens", "Spring"] },
   { id: "season", category: "Senses", prompt: "If this painting had a smell, what would it be?", keywords: ["Spring", "Earth", "Oil paint"] },
-  { id: "title", category: "Imagination", prompt: "Give the painting a new title. What would you call it?", keywords: ["Funny", "Poetic", "Simple"] },
+  { id: "title", category: "Imagination", prompt: "What happened five minutes before this scene?", keywords: ["something tragic", "somethings funny", "somethings surprising"] },
   { id: "changed", category: "Everyday", prompt: "Has the painting changed how the room feels?", keywords: ["Calmer", "Brighter", "No change"] },
   { id: "artist", category: "The artist", prompt: "What would you ask Aimé Barraud if he were here?", keywords: ["Why tulips", "His family", "Technique"] },
-  { id: "next", category: "Passing it on", prompt: "What should the next borrower know about living with it?", keywords: ["Light", "A good wall", "Enjoy it"] },
+  { id: "next", category: "Passing it on", prompt: " If this artwork could talk, what would it say?", keywords: ["Memory", "Relax", "Enjoy life"] },
 ];
 
 export const feelings = {
@@ -138,13 +198,31 @@ export const inspiration = {
 };
 
 export const instagram = {
-  handle: "skkg",
-  url: "https://www.instagram.com/skkg/",
+  name: "Artothek",
+  // TODO: confirm the Artothek's real Instagram handle.
+  handle: "artothek",
+  url: "https://www.instagram.com/artothek/",
   hashtags: "#SKKG #ArtAtHome #ArtForAll",
 };
 
+// Draft answers, based on the collection data above. TODO: have the Artothek / SKKG team check them.
 export const faq = [
-  { id: "why-tulips", question: "Why tulips, and why in a pot?" },
-  { id: "owner", question: "Who owns the painting?" },
-  { id: "frame", question: "Who made the frame?" },
+  {
+    id: "why-tulips",
+    question: "Why tulips, and why in a pot?",
+    answer:
+      "Tulips are a classic subject for still lifes: strong colours, stems that bend as the days pass, and a short life that reminds us beauty doesn't last. Barraud didn't leave an explanation, but by painting them in a simple clay pot instead of a precious vase, he brings the flowers into an ordinary home — the kind of room this painting was made for.",
+  },
+  {
+    id: "owner",
+    question: "Who owns the painting?",
+    answer:
+      "Tulipes belongs to the collection of the SKKG – Stiftung für Kunst, Kultur und Geschichte in Winterthur, which acquired it in November 1981. Since 2026 anyone with a Winterthur library card can borrow it through the Artothek.",
+  },
+  {
+    id: "frame",
+    question: "Who made the frame?",
+    answer:
+      "The maker of the frame isn't recorded in the collection documentation yet. It measures 61.2 × 53 × 7.9 cm and protects the canvas behind Artglass acrylic glazing, which is one reason the painting must never be taken out of it.",
+  },
 ];
