@@ -7,6 +7,7 @@ import DesignSystem from "@/pages/DesignSystem";
 import ErrorPage from "@/pages/ErrorPage";
 import Home from "@/pages/Home";
 import InstagramRedirect from "@/pages/InstagramRedirect";
+import LoanSurvey from "@/pages/LoanSurvey";
 import Placeholder from "@/pages/Placeholder";
 import SensorSetup from "@/pages/SensorSetup";
 import SocialImpact from "@/pages/SocialImpact";
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
         // Borrower app (mobile)
         { path: "/", element: <Home /> },
         { path: "/artwork", element: <ArtworkInfo /> },
+        { path: "/artwork/feedback", element: <LoanSurvey /> },
         { path: "/conservation", element: <Conservation /> },
         { path: "/conservation/setup", element: <SensorSetup /> },
         { path: "/social", element: <SocialImpact /> },

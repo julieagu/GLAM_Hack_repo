@@ -115,6 +115,20 @@ export const handlingRules: { kind: "do" | "dont"; text: string }[] = [
 
 // ---------- Social impact ----------
 
+// End-of-loan survey (Paper: Mobile/Social/Survey 0–5)
+export const survey = {
+  reasons: ["The colours", "The subject", "The artist", "It fit my home", "A memory", "Just a feeling", "Someone suggested it"],
+  changes: ["I notice details", "I visit museums more", "I talk about art more", "I feel more confident"],
+  agree: ["Strongly disagree", "Disagree", "Not sure", "Agree", "Strongly agree"],
+  /** «Which one tempts you?» — other Artothek works. */
+  picks: [
+    { title: "Blauer Berg", artist: "Victor Surbek" },
+    { title: "Studie", artist: "C. L'Eplattenier" },
+    { title: "Blick vom Zürichberg", artist: "Balz Stäger" },
+  ],
+  totalWorks: 70,
+};
+
 export const conversations = {
   count: 23,
 };

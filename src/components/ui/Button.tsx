@@ -11,8 +11,8 @@ const variants: Record<Variant, string> = {
   secondary: "border border-ink text-ink hover:bg-ink/5",
   // Area-colour fill with ink label — used on white cards («Start one»).
   area: "bg-area text-ink hover:brightness-95",
-  // Desktop: lime action (e.g. «Confirm» in the loans table).
-  highlight: "bg-lime text-ink hover:bg-lime-soft",
+  // Desktop: highlight (pink) action (e.g. «Confirm» in the loans table).
+  highlight: "bg-highlight text-ink hover:bg-pink-soft",
 };
 
 const sizes: Record<Size, string> = {

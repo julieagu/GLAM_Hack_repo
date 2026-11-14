@@ -32,7 +32,12 @@ export default function ArtworkInfo() {
       </section>
 
       <section className="px-6 pb-10" aria-label="Your loan">
-        <LoanCard start={currentLoan.start} end={currentLoan.end} returnSteps={currentLoan.returnSteps} />
+        <LoanCard
+          start={currentLoan.start}
+          end={currentLoan.end}
+          returnSteps={currentLoan.returnSteps}
+          feedbackTo="/artwork/feedback"
+        />
       </section>
 
       <section className="px-6 pb-10">

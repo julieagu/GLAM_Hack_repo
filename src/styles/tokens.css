@@ -1,7 +1,7 @@
 /*
  * Design tokens — Tailwind v4 theme.
  * Source of truth: Paper file "Glam_hack", page "Design System v2 – Dev handoff".
- * Exported from Paper on 2026-11-14. Edit tokens in Paper first, then re-export here.
+ * Exported from Paper on 2026-11-14 (highlight = pink since the Artothek logo). Edit tokens in Paper first, then re-export here.
  *
  * Spacing: the DS spacing scale (4 / 8 / 12 / 16 / 24 / 32 / 40 / 80, plus 6 and 20)
  * maps onto Tailwind's default 4px step, so it is NOT overridden here:
@@ -69,12 +69,15 @@
   /* ---------- Accent ---------- */
   --color-lime: #c8ff59;
   --color-lime-soft: #efffcf;
+  /* Artothek brand pink (from the ARTOTHEK sticker logo). */
+  --color-pink: #f2aae5;
+  --color-pink-soft: #fbe3f6;
 
   /* ---------- Semantic ---------- */
   --color-area-artwork: var(--color-mint-500);
   --color-area-social: var(--color-orange-500);
   --color-area-conservation: var(--color-blue-500);
-  --color-highlight: var(--color-lime);
+  --color-highlight: var(--color-pink);
   --color-status-ok: var(--color-mint-600);
   --color-status-watch: var(--color-orange-300);
   --color-status-action: var(--color-orange-600);
