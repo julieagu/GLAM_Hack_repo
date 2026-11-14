@@ -30,14 +30,14 @@ export default function SocialImpact() {
   return (
     <MobileScreen area="social">
       <PageTopBar />
-      <PageTitle title="Social impact" lead="What this painting sparks in the homes it visits." />
+      <PageTitle title="Be Part of The Story" lead="Your experiences, feelings and conversations" />
 
       <section className="flex flex-col gap-2.5 px-6 pb-10" aria-label="Conversations">
         <Card className="flex flex-col gap-4">
           <div className="flex items-end gap-3">
             <span className="text-[64px] leading-[60px] font-light tracking-hero">{conversations.count}</span>
             <span className="pb-1 text-body">
-              conversations
+              Chattings
               <br />
               started by this painting
             </span>
@@ -64,7 +64,7 @@ export default function SocialImpact() {
       </section>
 
       <section id="feelings" className="flex scroll-mt-4 flex-col gap-3 px-6 pb-10">
-        <SectionHeader title="How it makes people feel" className="[&>div]:pb-0" />
+        <SectionHeader title="How I makes people feel" className="[&>div]:pb-0" />
         <p className="text-caption leading-5 text-area-ink">
           Answers from {feelings.respondents} borrowers to «{feelings.question}»
         </p>
@@ -86,7 +86,7 @@ export default function SocialImpact() {
                 to="/social/feelings"
                 className="flex h-12 items-center gap-2 rounded-pill bg-ink px-6 text-body text-area shadow-[0_6px_20px_-6px_var(--color-ink)] hover:bg-ink-soft"
               >
-                <Icon name="plus" size={18} /> How you feel
+                <Icon name="plus" size={18} /> Share how i make you feel
               </Link>
             </div>
           </div>
@@ -100,7 +100,7 @@ export default function SocialImpact() {
           className="[&>div]:pb-0"
         />
         <p className="text-caption leading-5 text-area-ink">
-          Drawings, photos and poems made by borrowers after living with {art.title}.
+          Drawings, photos, recipes and poems created by borrowers inspired by their time with{art.title}.
         </p>
         {/* Gallery: photos taken in the app (newest first), then pictures from src/assets/creativity-work/.
             Empty placeholder tiles only fill the row up to 3 — each new photo takes a placeholder's place. */}
@@ -122,7 +122,7 @@ export default function SocialImpact() {
           to="/social/creativity-work/camera"
           className="flex h-11 items-center justify-center gap-2 rounded-pill bg-ink text-body text-area hover:bg-ink-soft"
         >
-          <Icon name="camera" /> Photograph your work
+          <Icon name="camera" /> Upload your creation
         </Link>
       </section>
 

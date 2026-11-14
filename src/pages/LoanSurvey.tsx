@@ -53,8 +53,8 @@ export default function LoanSurvey() {
             <span className="self-start rounded-pill bg-ink px-2.5 py-[3px] text-micro text-area">
               Your loan ends in {daysLeft} {daysLeft === 1 ? "day" : "days"}
             </span>
-            <h1 className="pt-4 text-display font-light tracking-tight">Before {art.title} goes back</h1>
-            <p className="pt-3 text-lead text-area-ink">Tell us how the last six months felt. It helps us bring more art into more homes.</p>
+            <h1 className="pt-4 text-display font-light tracking-tight">My Time With You</h1>
+            <p className="pt-3 text-lead text-area-ink">Four quick questions before your [art.title] returns to the collection.</p>
             <div className="mt-7 flex items-center gap-3.5 rounded-md bg-white p-3.5">
               <div className="h-18 w-14 shrink-0 rounded-sm bg-stone bg-cover bg-center" style={thumb ? { backgroundImage: `url(${thumb})` } : undefined} />
               <div className="flex flex-col gap-0.5">
@@ -110,7 +110,7 @@ export default function LoanSurvey() {
         {step === 2 && (
           <Question
             eyebrow={`Since ${art.title} moved in`}
-            title="Do you look at art differently now?"
+            title="Has living with me changed how you see art?"
             helper="Six months with one painting can change a lot, or nothing at all."
           >
             <div className="flex flex-col gap-2" role="radiogroup" aria-label="From 1, not at all, to 5, completely">
@@ -187,7 +187,7 @@ export default function LoanSurvey() {
         )}
 
         {step === 4 && (
-          <Question eyebrow="What's next" title="Would you host another artwork?">
+          <Question eyebrow="What's next" title="Would you like to host another artwork?">
             <Segmented
               value={a.hostAgain}
               onChange={(v) => set("hostAgain", v as LoanFeedback["hostAgain"])}
@@ -320,7 +320,7 @@ function ThankYou({ wishlist }: { wishlist: string[] }) {
         <Icon name="heart" size={28} />
       </span>
       <h1 className="pt-5 text-display font-light tracking-tight">Thank you</h1>
-      <p className="pt-2 pb-6 text-lead text-area-ink">Your answers help us bring original art to more homes in Winterthur.</p>
+      <p className="pt-2 pb-6 text-lead text-area-ink">Your answers help us bring original artworks into more homes in Winterthur and hopefully soon beyond!</p>
       <div className="flex flex-col gap-2">
         <Link to="/artwork" className="flex items-center gap-3 rounded-md bg-white px-4 py-3.5">
           <span className="flex size-9 shrink-0 items-center justify-center rounded-pill bg-area-soft">

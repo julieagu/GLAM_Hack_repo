@@ -20,7 +20,7 @@ export default function Conservation() {
   return (
     <MobileScreen area="conservation">
       <PageTopBar />
-      <PageTitle title="Care guide" lead="How to live with an original painting at home." />
+      <PageTitle title="How to Take Care of Me" lead="Help me stay safe and in good condition." />
 
       {sensor.done ? (
         <section id="live" className="flex scroll-mt-4 flex-col gap-3 px-6 pb-10" aria-label="Live conditions">
@@ -70,7 +70,7 @@ export default function Conservation() {
       )}
 
       <section className="px-6 pb-10">
-        <SectionHeader title="How to hang it" />
+        <SectionHeader title="How to hang me" />
         <List>
           {hangingSteps.map((s, i) => (
             <StepRow key={s} n={i + 1}>

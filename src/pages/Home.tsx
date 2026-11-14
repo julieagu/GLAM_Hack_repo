@@ -5,16 +5,16 @@ import { featuredArtwork as art, type Area } from "@/data/mock";
 import { useArtworkImages } from "@/lib/useArtworkImages";
 
 const categories: { area: Area; to: string; title: string; subtitle: string }[] = [
-  { area: "artwork", to: "/artwork", title: "Artwork Information", subtitle: "Story, provenance, details" },
-  { area: "social", to: "/social", title: "Social impact", subtitle: "Stories from people who lived with it" },
-  { area: "conservation", to: "/conservation", title: "Conservation", subtitle: "How to care: temperature, humidity, light" },
+  { area: "artwork", to: "/artwork", title: "Discover My Story", subtitle: "Get to know me and my history." },
+  { area: "social", to: "/social", title: "Be Part of The Story", subtitle: "Your experiences, feeling and conversations" },
+  { area: "conservation", to: "/conservation", title: "How to Take Care of Me", subtitle: "Help me stay safe and in good condition" },
 ];
 
 export default function Home() {
   const [image] = useArtworkImages(art.title, 400);
   return (
     <MobileScreen footer={<FooterTabs />}>
-      <BrandHeader tagline="The Life of an Artwork" />
+      <BrandHeader title="Welcome Home…" tagline="The Life of an Artwork" />
 
       <section className="flex gap-4 px-6 pb-7" aria-label="Artwork summary">
         <div

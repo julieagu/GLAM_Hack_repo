@@ -1,6 +1,8 @@
-// End-of-loan survey answers. Prototype only: kept in this browser (localStorage).
+// End-of-loan survey answers. Prototype/demo: kept in memory only, so "✓ Feedback sent"
+// stays while you move around the app, but a page refresh forgets the answers.
 // TODO: send to the Artothek backend (anonymous).
 
+/** Old localStorage key, only used to clean up. */
 const KEY = "artothek:loan-feedback";
 
 export interface LoanFeedback {
@@ -26,19 +28,19 @@ export const emptyFeedback: LoanFeedback = {
   wishlist: [],
 };
 
+let current: LoanFeedback | null = null;
+
+// Earlier versions kept the answers in localStorage; drop them so a refresh starts clean.
+try {
+  localStorage.removeItem(KEY);
+} catch {
+  /* storage blocked: nothing to clean */
+}
+
 export function loadFeedback(): LoanFeedback | null {
-  try {
-    const raw = localStorage.getItem(KEY);
-    return raw ? (JSON.parse(raw) as LoanFeedback) : null;
-  } catch {
-    return null;
-  }
+  return current;
 }
 
 export function saveFeedback(f: LoanFeedback) {
-  try {
-    localStorage.setItem(KEY, JSON.stringify({ ...f, sentAt: new Date().toISOString() }));
-  } catch {
-    /* ignore */
-  }
+  current = { ...f, sentAt: new Date().toISOString() };
 }

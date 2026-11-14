@@ -24,7 +24,7 @@ export const featuredArtwork = {
   recordUrl: undefined as string | undefined,
   documentationUrl: undefined as string | undefined,
   history: {
-    lead: "Painted for a living room, not a museum.",
+    lead: "Art doesn't have to stay only in museums.",
     body: "Aimé Barraud (1902–1954) belonged to a family of painters from La Chaux-de-Fonds. The SKKG acquired this still life in November 1981. Since 2026 it is one of ten works from the collection that members of the Winterthur libraries can borrow through the Artothek.",
     timeline: [
       { year: "1902", event: "Aimé Barraud born in La Chaux-de-Fonds" },
