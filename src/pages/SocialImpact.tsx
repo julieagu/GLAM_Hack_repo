@@ -3,19 +3,21 @@ import { Link, useLocation } from "react-router";
 import { FooterTabs, MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
 import { Button, Card, Icon, List, PendingQuestionRow, QARow, RadarChart, SectionHeader, TextArea } from "@/components/ui";
 import { conversations, faq, featuredArtwork as art, feelings, inspiration, instagram, stories } from "@/data/mock";
+import { creativityWorkImages, instagramImages } from "@/lib/assetImages";
 import { useCreativeWorks } from "@/lib/creativeWorks";
 import { useMyQuestions } from "@/lib/myQuestions";
-import { useArtworkImages } from "@/lib/useArtworkImages";
 import { useRotatingIndex } from "@/lib/useRotatingStory";
 
 export default function SocialImpact() {
   const [question, setQuestion] = useState("");
   const { questions: myQuestions, ask } = useMyQuestions();
-  // Until borrowers' uploads exist, show the artwork itself as Instagram placeholders.
-  const photos = useArtworkImages(art.title, 300);
   // A different borrower story each time the page is opened.
   const story = stories[useRotatingIndex(stories.length)];
   const { works: myWorks } = useCreativeWorks();
+  const gallery = [
+    ...myWorks.map((w) => ({ key: w.id, url: w.imageUrl, label: w.author })),
+    ...creativityWorkImages.map((a) => ({ key: a.url, url: a.url, label: a.label })),
+  ];
   const { hash } = useLocation();
 
   // Coming back from the camera: jump to the gallery so the new photo is in view.
@@ -73,29 +75,25 @@ export default function SocialImpact() {
       <section id="creativity-work" className="flex scroll-mt-4 flex-col gap-3 px-6 pb-10">
         <SectionHeader
           title="Creativity work"
-          meta={`${inspiration.total + myWorks.length} works`}
+          meta={`${Math.max(inspiration.total, creativityWorkImages.length) + myWorks.length} works`}
           className="[&>div]:pb-0"
         />
         <p className="text-caption leading-5 text-area-ink">
           Drawings, photos and poems made by borrowers after living with {art.title}.
         </p>
-        {/* Gallery: your photos first (newest first), then other borrowers' works. */}
+        {/* Gallery: photos taken in the app (newest first), then pictures from src/assets/creativity-work/.
+            Empty placeholder tiles only fill the row up to 3 — each new photo takes a placeholder's place. */}
         <ul className="grid grid-cols-3 gap-2">
-          {myWorks.map((w) => (
-            <li key={w.id} className="flex flex-col gap-1">
-              <img src={w.imageUrl} alt="Your work" className="h-30 w-full rounded-md object-cover" />
-              <span className="text-micro">{w.author}</span>
+          {gallery.map((g) => (
+            <li key={g.key} className="flex flex-col gap-1">
+              <img src={g.url} alt={`Work by ${g.label}`} className="h-30 w-full rounded-md object-cover" />
+              <span className="text-micro">{g.label}</span>
             </li>
           ))}
-          {inspiration.works.map((w) => (
-            <li key={w.author} className="flex flex-col gap-1">
-              <div
-                className="h-30 rounded-md bg-orange-300 bg-cover bg-center"
-                style={w.imageUrl ? { backgroundImage: `url(${w.imageUrl})` } : undefined}
-                role="img"
-                aria-label={`Work by ${w.author}`}
-              />
-              <span className="text-micro">{w.author}</span>
+          {Array.from({ length: Math.max(0, 3 - gallery.length) }, (_, i) => (
+            <li key={`empty-${i}`} className="flex flex-col gap-1" aria-hidden="true">
+              <div className="h-30 rounded-md bg-orange-300" />
+              <span className="text-micro">&nbsp;</span>
             </li>
           ))}
         </ul>
@@ -113,14 +111,15 @@ export default function SocialImpact() {
             <h2 className="text-lead">{instagram.name} on Instagram</h2>
             <Icon name="instagram" size={20} />
           </div>
+          {/* First 3 pictures from src/assets/instagram/; plain tiles until there are 3. */}
           <div className="flex gap-1.5">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="h-24 flex-1 rounded-sm bg-stone bg-cover bg-center"
-                style={photos[i] ? { backgroundImage: `url(${photos[i]})` } : undefined}
-              />
-            ))}
+            {[0, 1, 2].map((i) =>
+              instagramImages[i] ? (
+                <img key={i} src={instagramImages[i].url} alt="" className="h-24 min-w-0 flex-1 rounded-sm object-cover" />
+              ) : (
+                <div key={i} className="h-24 flex-1 rounded-sm bg-stone" aria-hidden="true" />
+              ),
+            )}
           </div>
           <p className="text-body">Show us where the painting lives in your home.</p>
           <p className="text-caption font-medium text-area-strong">{instagram.hashtags}</p>

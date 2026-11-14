@@ -14,7 +14,7 @@ export default function Home() {
   const [image] = useArtworkImages(art.title, 400);
   return (
     <MobileScreen footer={<FooterTabs />}>
-      <BrandHeader title={art.title} />
+      <BrandHeader tagline="The Life of an Artwork" />
 
       <section className="flex gap-4 px-6 pb-7" aria-label="Artwork summary">
         <div
@@ -23,18 +23,21 @@ export default function Home() {
           role="img"
           aria-label={`${art.title} by ${art.artist}`}
         />
-        <dl className="flex flex-col gap-3.5 pt-0.5">
-          {[
-            ["Year", art.year],
-            ["Artist", art.artist],
-            ["Technique", art.technique],
-          ].map(([k, v]) => (
-            <div key={k} className="flex flex-col gap-0.5">
-              <dt className="text-micro tracking-wide text-ink-muted">{k}</dt>
-              <dd className="text-body">{v}</dd>
-            </div>
-          ))}
-        </dl>
+        <div className="flex min-w-0 flex-col gap-3.5 pt-0.5">
+          <h1 className="text-headline font-bold tracking-[-0.01em]">{art.title}</h1>
+          <dl className="flex flex-col gap-3.5">
+            {[
+              ["Year", art.year],
+              ["Artist", art.artist],
+              ["Technique", art.technique],
+            ].map(([k, v]) => (
+              <div key={k} className="flex flex-col gap-0.5">
+                <dt className="text-micro tracking-wide text-ink-muted">{k}</dt>
+                <dd className="text-body">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </section>
 
       <nav className="flex flex-col gap-2.5 px-6 pb-6" aria-label="Sections">

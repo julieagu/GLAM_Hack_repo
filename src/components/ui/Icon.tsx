@@ -19,6 +19,18 @@ const paths = {
     </g>
   ),
   shield: <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z" strokeWidth="1.6" />,
+  signal: (
+    <g strokeWidth="1.7">
+      <path d="M5 12a7 7 0 0 1 14 0M8.5 12a3.5 3.5 0 0 1 7 0" />
+      <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+    </g>
+  ),
+  eye: (
+    <g strokeWidth="1.6">
+      <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z" />
+      <circle cx="12" cy="12" r="3" />
+    </g>
+  ),
   camera: (
     <g strokeWidth="1.6">
       <path d="M4 8h3l2-3h6l2 3h3v11H4z" />

@@ -72,6 +72,30 @@ export const sensorReadings: SensorReading[] = [
   { key: "light", label: "Light", value: "340 lx", ideal: "Ideal < 200 lx", position: 0.64, idealFrom: 0, idealTo: 0.4, status: "action" },
 ];
 
+// Sensor setup (Paper: Mobile/Conservation/Setup 1–3b)
+export const setupChecklist = [
+  "A dry room, not a bathroom or kitchen",
+  "Not above a radiator or heater",
+  "No direct sun on the wall",
+  "One or two nails in the wall",
+];
+
+export const sensorDevice = { name: "SKKG Sensor · 2189", battery: "96%" };
+
+/** First measurement in the prototype: too warm and too bright. */
+export const moveSpotReadings: SensorReading[] = [
+  { key: "temperature", label: "Temp.", value: "25.6°", ideal: "Ideal 18–22°", position: 0.74, idealFrom: 0.4, idealTo: 0.6, status: "action" },
+  { key: "humidity", label: "Humidity", value: "46%", ideal: "Ideal 40–60%", position: 0.4, idealFrom: 0.33, idealTo: 0.67, status: "ok" },
+  { key: "light", label: "Light", value: "340 lx", ideal: "Ideal < 200 lx", position: 0.64, idealFrom: 0, idealTo: 0.4, status: "action" },
+];
+
+/** After «Measure another spot»: all good. */
+export const goodSpotReadings: SensorReading[] = [
+  { key: "temperature", label: "Temp.", value: "20.8°", ideal: "Ideal 18–22°", position: 0.48, idealFrom: 0.4, idealTo: 0.6, status: "ok" },
+  { key: "humidity", label: "Humidity", value: "49%", ideal: "Ideal 40–60%", position: 0.44, idealFrom: 0.33, idealTo: 0.67, status: "ok" },
+  { key: "light", label: "Light", value: "120 lx", ideal: "Ideal < 200 lx", position: 0.2, idealFrom: 0, idealTo: 0.4, status: "ok" },
+];
+
 export const sensorAdvice = "Too much light since 10:00. Close the curtain or move the painting away from the window.";
 
 export const hangingSteps = [
@@ -188,13 +212,10 @@ export const feelings = {
   ],
 };
 
+// Creativity work: the pictures themselves come from src/assets/creativity-work/ (see its README).
 export const inspiration = {
+  /** Number shown in the section header before any photo is added. */
   total: 12,
-  works: [
-    { author: "Lena", imageUrl: undefined as string | undefined },
-    { author: "Marco", imageUrl: undefined as string | undefined },
-    { author: "Anouk", imageUrl: undefined as string | undefined },
-  ],
 };
 
 export const instagram = {

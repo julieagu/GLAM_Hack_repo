@@ -1,36 +1,73 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router";
+import { SensorIcon } from "@/components/features/SensorIllustration";
 import { FooterTabs, MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
 import { Button, Card, Icon, List, RuleRow, SectionHeader, SensorTile, StatusDot, StepRow, TextArea } from "@/components/ui";
-import { handlingRules, hangingSteps, sensorAdvice, sensorReadings } from "@/data/mock";
+import { featuredArtwork as art, handlingRules, hangingSteps, sensorAdvice, sensorReadings } from "@/data/mock";
+import { useSensorSetup } from "@/lib/sensorSetup";
 
 export default function Conservation() {
   const [question, setQuestion] = useState("");
   const [sent, setSent] = useState(false);
+  const sensor = useSensorSetup();
+  const { hash } = useLocation();
+
+  // Back from the setup: bring the new sensor data into view.
+  useEffect(() => {
+    if (hash) document.getElementById(hash.slice(1))?.scrollIntoView({ block: "start" });
+  }, [hash]);
 
   return (
     <MobileScreen area="conservation" footer={<FooterTabs />}>
       <PageTopBar />
       <PageTitle title="Care guide" lead="How to live with an original painting at home." />
 
-      <section className="flex flex-col gap-3 px-6 pb-10" aria-label="Live conditions">
-        <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
-          <span className="text-caption font-medium">Right now in your room</span>
-          <span className="flex items-center gap-1.5 whitespace-nowrap text-micro text-area-ink">
-            <StatusDot status="ok" /> Sensor live · 2 min ago
-          </span>
-        </div>
-        <div className="grid grid-cols-3 gap-2 min-[360px]:gap-2.5">
-          {sensorReadings.map((r) => (
-            <SensorTile key={r.key} reading={r} />
-          ))}
-        </div>
-        {sensorReadings.some((r) => r.status !== "ok") && (
-          <Card tone="ink" className="flex items-start gap-3 p-4 text-caption" role="status">
-            <StatusDot status="action" className="mt-1.5" />
-            {sensorAdvice}
+      {sensor.done ? (
+        <section id="live" className="flex scroll-mt-4 flex-col gap-3 px-6 pb-10" aria-label="Live conditions">
+          <div className="flex flex-wrap items-center justify-between gap-x-2 gap-y-1">
+            <span className="text-caption font-medium">Right now in your room</span>
+            <span className="flex items-center gap-1.5 whitespace-nowrap text-micro text-area-ink">
+              <StatusDot status="ok" /> Sensor live · 2 min ago
+            </span>
+          </div>
+          <div className="grid grid-cols-3 gap-2 min-[360px]:gap-2.5">
+            {sensorReadings.map((r) => (
+              <SensorTile key={r.key} reading={r} />
+            ))}
+          </div>
+          {sensorReadings.some((r) => r.status !== "ok") && (
+            <Card tone="ink" className="flex items-start gap-3 p-4 text-caption" role="status">
+              <StatusDot status="action" className="mt-1.5" />
+              {sensorAdvice}
+            </Card>
+          )}
+          {/* Prototype helper so the first-time flow can be shown again. */}
+          <button type="button" onClick={sensor.reset} className="self-start text-micro text-area-ink underline underline-offset-4">
+            Run the setup again
+          </button>
+        </section>
+      ) : (
+        // First time: no sensor yet → no data, just the way into the setup.
+        <section className="px-6 pb-10" aria-label="Set up the sensor">
+          <Card className="flex flex-col gap-4">
+            <div className="flex items-center gap-3.5">
+              <SensorIcon />
+              <div className="flex flex-col gap-0.5">
+                <span className="text-body font-medium">No sensor data yet</span>
+                <span className="text-caption leading-5">
+                  Before you hang {art.title}, check the wall and connect the sensor. It takes about 5 minutes.
+                </span>
+              </div>
+            </div>
+            <Link
+              to="/conservation/setup"
+              className="flex h-12 items-center justify-center rounded-pill bg-ink text-body text-area hover:bg-ink-soft"
+            >
+              Set up the artwork
+            </Link>
           </Card>
-        )}
-      </section>
+        </section>
+      )}
 
       <section className="px-6 pb-10">
         <SectionHeader title="How to hang it" />
