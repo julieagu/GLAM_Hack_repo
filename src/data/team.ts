@@ -15,6 +15,6 @@ export const project = {
 export const team = [
   { name: "Christine", role: "Role placeholder", bio: "One sentence about Christine goes here.", linkedin: "" },
   { name: "Juliane", role: "Role placeholder", bio: "One sentence about Juliane goes here.", linkedin: "" },
-  { name: "Lara", role: "Role placeholder", bio: "One sentence about Lara goes here.", linkedin: "" },
-  { name: "Julie", role: "Role placeholder", bio: "One sentence about Julie goes here.", linkedin: "" },
+  { name: "Lara", role: "Design fairy", bio: "Lara is a great designer, and she is very efficient and hard working, so hire her too", linkedin: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
+  { name: "Julie", role: "UX designer & Web developer", bio: "Julies is looking for a job so please hire me", linkedin: "https://www.linkedin.com/in/julie-agustoni/" },
 ];
