@@ -19,6 +19,24 @@ npm run dev        # http://localhost:5173
 npm run build      # type-check + production build
 ```
 
+## Deploy
+
+Live: **https://julieagu.github.io/GLAM_Hack_repo/**
+
+Every push to `main` builds the app and publishes it to GitHub Pages (`.github/workflows/deploy.yml`).
+One-time setup: repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+How it works on a static host:
+- The Pages build sets `GITHUB_PAGES=true`, so Vite and the router use the `/GLAM_Hack_repo/` base path. Local `npm run dev` stays at `/`.
+- `npm run build` also writes `dist/404.html` (a copy of `index.html`), so refreshing or sharing a deep link like `/social/conversations` still opens the app.
+- Reference public files with `import.meta.env.BASE_URL` (e.g. the SKKG logo), never with a leading `/`.
+
+Test the Pages build locally:
+
+```bash
+GITHUB_PAGES=true npm run build && npm run preview -- --base /GLAM_Hack_repo/
+```
+
 Useful routes: `/` home · `/artwork` · `/social` · `/conservation` · `/staff` · `/design-system` (living style guide).
 
 ## Project structure

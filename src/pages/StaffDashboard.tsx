@@ -8,7 +8,7 @@ export default function StaffDashboard() {
   return (
     <div className="min-h-dvh bg-white">
       <header className="flex h-18 items-center justify-between border-b border-ink px-6">
-        <img src="/skkg-logo.svg" alt="SKKG" width={160} height={26} />
+        <img src={`${import.meta.env.BASE_URL}skkg-logo.svg`} alt="SKKG" width={160} height={26} />
         <nav className="flex gap-1 rounded-pill border border-ink p-1 text-caption">
           <span className="rounded-pill bg-ink px-4 py-1.5 text-white">Artwork</span>
           <span className="px-4 py-1.5">Artothek overview</span>

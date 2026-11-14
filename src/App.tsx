@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   // Dev
   { path: "/design-system", element: <DesignSystem /> },
   { path: "*", element: <Placeholder title="Not found" /> },
-]);
+], { basename: import.meta.env.BASE_URL });
 
 export default function App() {
   return <RouterProvider router={router} />;
