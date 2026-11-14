@@ -129,7 +129,7 @@
   html:has([data-area="conservation"]) { background: var(--color-blue-500); }
   html:has([data-area="about"]) { background: var(--color-pink); }
   @media (width >= 48rem) {
-    html:has([data-area]) { background: var(--color-stone); }
+    html:has([data-area]) { background: var(--color-ink); }
   }
   :focus-visible {
     outline: 2px solid var(--color-ink);

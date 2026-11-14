@@ -81,6 +81,9 @@
   --color-status-ok: var(--color-mint-600);
   --color-status-watch: var(--color-orange-300);
   --color-status-action: var(--color-orange-600);
+  /* Alert red (code only, not in Paper yet): warnings that must stand out on any area colour.
+     Dark enough for large text on blue-500 (≈3.3:1). */
+  --color-alert: #a8131a;
 
   /* ---------- Typography ---------- */
   --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;

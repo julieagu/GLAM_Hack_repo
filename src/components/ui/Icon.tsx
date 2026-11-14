@@ -57,6 +57,13 @@ const paths = {
       <circle cx="12" cy="13" r="3.5" />
     </g>
   ),
+  alert: (
+    <g strokeWidth="1.8">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7.5v5.5" />
+      <circle cx="12" cy="16.5" r="0.6" fill="currentColor" />
+    </g>
+  ),
   globe: (
     <g strokeWidth="1.5">
       <circle cx="12" cy="12" r="8.5" />

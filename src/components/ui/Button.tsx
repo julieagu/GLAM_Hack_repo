@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-type Variant = "primary" | "secondary" | "area" | "highlight";
+type Variant = "primary" | "secondary" | "area" | "highlight" | "alert";
 type Size = "lg" | "md" | "sm" | "xs";
 
 const variants: Record<Variant, string> = {
@@ -13,6 +13,8 @@ const variants: Record<Variant, string> = {
   area: "bg-area text-ink hover:brightness-95",
   // Desktop: highlight (pink) action (e.g. «Confirm» in the loans table).
   highlight: "bg-highlight text-ink hover:bg-pink-soft",
+  // Alert red with white label — the action to take when something is wrong («Measure another spot»).
+  alert: "bg-alert text-white hover:brightness-110",
 };
 
 const sizes: Record<Size, string> = {

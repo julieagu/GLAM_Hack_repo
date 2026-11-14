@@ -36,7 +36,7 @@ export function MobileScreen({ area, children, footer, className }: MobileScreen
   }, [area]);
 
   return (
-    <div data-area={area} className="min-h-dvh bg-area md:bg-stone">
+    <div data-area={area} className="min-h-dvh bg-area md:bg-ink">
       <div
         className={cn(
           "mx-auto flex min-h-dvh w-full flex-col bg-area md:max-w-phone md:shadow-[0_0_0_1px_var(--color-line)]",

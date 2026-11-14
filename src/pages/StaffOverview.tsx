@@ -25,15 +25,15 @@ export default function StaffOverview() {
         title={
           // The ARTOTHEK sticker logo stands in for the word "Artothek".
           // Tilted left like a stuck-on sticker (Home tilts it right).
-          <span className="flex flex-wrap items-end gap-x-4 gap-y-2 pt-5 desk:gap-x-6 desk:pt-3">
+          <span className="flex flex-wrap items-end gap-x-4 gap-y-1 pt-5 desk:gap-x-5 desk:pt-6">
             <img
               src={artothekLogo}
               alt="Artothek"
               width={125}
               height={52}
-              className="h-[72px] w-auto origin-bottom-left -rotate-[8deg] drop-shadow-[2px_3px_0_var(--color-ink)] desk:h-[112px]"
+              className="h-[88px] w-auto -rotate-[8deg] drop-shadow-[2px_3px_0_var(--color-ink)] desk:h-[140px]"
             />
-            overview
+            Overview
           </span>
         }
         actions={

@@ -37,11 +37,11 @@ function TeamMember({ name, role, bio, linkedin, website }: (typeof team)[number
   return (
     <li className="flex flex-col gap-2.5">
       {photo ? (
-        <img src={photo} alt={name} className="aspect-square w-full rounded-md border border-ink object-cover" />
+        <img src={photo} alt={name} className="aspect-square w-full rounded-pill border border-ink object-cover" />
       ) : (
         // Placeholder until src/assets/team/<name>.jpg exists.
         <div
-          className="flex aspect-square w-full items-center justify-center rounded-md border border-dashed border-ink bg-pink-soft text-display font-light"
+          className="flex aspect-square w-full items-center justify-center rounded-pill border border-dashed border-ink bg-pink-soft text-display font-light"
           role="img"
           aria-label={`Photo of ${name} (placeholder)`}
         >

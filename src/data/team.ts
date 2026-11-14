@@ -22,8 +22,8 @@ export interface TeamMember {
 }
 
 export const team: TeamMember[] = [
-  { name: "Christine", role: "Project Manager", bio: "One sentence about Christine goes here.", linkedin: "linkedin.com/in/christine-müller-stalder" },
-  { name: "Juliane", role: "Role placeholder", bio: "One sentence about Juliane goes here.", linkedin: "https://www.linkedin.com/in/jul-eberhardt/" },
-  { name: "Lara", role: "UX % UI Designer", bio: "Lara is a great designer, and she is very efficient and hard working, so hire her too", linkedin: "https://www.linkedin.com/in/lara-rodrigues-ristic/", website: "https://lararr.com/" },
-  { name: "Julie", role: "UX Designer & Web Developer", bio: "Julies is looking for a job so please hire me", linkedin: "https://www.linkedin.com/in/julie-agustoni/", website: "https://julieagustoni.com/" },
+  { name: "Christine", role: "Project Manager", bio: "", linkedin: "linkedin.com/in/christine-müller-stalder" },
+  { name: "Juliane", role: "Role placeholder", bio: "", linkedin: "https://www.linkedin.com/in/jul-eberhardt/" },
+  { name: "Lara", role: "UX & UI Designer", bio: "", linkedin: "https://www.linkedin.com/in/lara-rodrigues-ristic/", website: "https://lararr.com/" },
+  { name: "Julie", role: "UX Designer & Web Developer", bio: "", linkedin: "https://www.linkedin.com/in/julie-agustoni/", website: "https://julieagustoni.com/" },
 ];

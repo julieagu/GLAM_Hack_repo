@@ -63,8 +63,7 @@ export function StaffShell({ children }: { children: ReactNode }) {
               />
             </Link>
             <span className="truncate border-l border-ink pl-3 desk:overflow-visible text-caption text-ink-muted desk:pl-3.5">
-              <span className="desk:hidden">Staff</span>
-              <span className="hidden desk:inline">Artothek · Hello, {staffUser.name}</span>
+              Staff
             </span>
           </div>
 
@@ -108,12 +107,11 @@ export function StaffShell({ children }: { children: ReactNode }) {
   );
 }
 
-/** Page title row: greeting (mobile only), hero title, optional actions on the right. */
+/** Page title row: hero title, optional actions on the right. */
 export function StaffTitle({ title, actions }: { title: ReactNode; actions?: ReactNode }) {
   return (
-    <div className="flex flex-col gap-4 pt-6 pb-6 desk:flex-row desk:items-end desk:justify-between desk:pt-9 desk:pb-7">
+    <div className="flex flex-col gap-4 pt-4 pb-6 desk:flex-row desk:items-end desk:justify-between desk:pt-5 desk:pb-7">
       <div className="flex flex-col gap-2">
-        <span className="text-caption text-ink-muted desk:hidden">Artothek · Hello, {staffUser.name}</span>
         <h1 className="text-[48px] leading-[48px] font-light tracking-hero desk:text-hero">{title}</h1>
       </div>
       {actions && <div className="flex items-center gap-2 desk:pb-1.5">{actions}</div>}

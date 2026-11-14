@@ -166,7 +166,7 @@ export default function SensorSetup() {
         )}
         {step === "result" && !good && (
           <>
-            <Button size="lg" block onClick={measure} disabled={measuring} iconStart={<Icon name="signal" size={18} />}>
+            <Button variant="alert" size="lg" block onClick={measure} disabled={measuring} iconStart={<Icon name="alert" size={20} />}>
               {measuring ? "Measuring the new spot …" : "Measure another spot"}
             </Button>
             <button type="button" onClick={finish} className="text-caption underline underline-offset-[3px]">
@@ -213,10 +213,7 @@ function GoodSpot({ readings }: { readings: SensorReading[] }) {
 function MoveIt({ readings }: { readings: SensorReading[] }) {
   return (
     <>
-      <span className="flex size-16 shrink-0 items-center justify-center rounded-pill border-[1.5px] border-ink bg-orange-500 text-ink">
-        <Icon name="arrow-right" size={28} />
-      </span>
-      <h1 className="pt-5 text-display font-light tracking-tight">Better move it</h1>
+      <h1 className="text-display font-light tracking-tight">Better move it</h1>
       <p className="pt-2 pb-6 text-lead text-area-ink">This spot is too warm and too bright for an oil painting.</p>
       <ResultTiles readings={readings} />
       <div className="mt-3 mb-4 flex flex-col gap-1.5 rounded-md bg-ink px-4 py-3.5">
