@@ -1,9 +1,9 @@
 import { NavLink } from "react-router";
 import { cn } from "@/lib/cn";
 
-// «Dashboard» is the Home screen (the artwork overview); `end` keeps it from matching every page.
+// «Dashboard» opens the staff dashboard (/staff → Overview, /staff/artworks → Tulipes).
 const tabs = [
-  { to: "/", label: "Dashboard", end: true },
+  { to: "/staff", label: "Dashboard", end: false },
   { to: "/qa", label: "Q&A", end: false },
   { to: "/about", label: "About", end: false },
 ];

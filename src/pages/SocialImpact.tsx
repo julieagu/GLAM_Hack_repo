@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
-import { FooterTabs, MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
+import { MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
 import { Button, Card, Icon, List, PendingQuestionRow, QARow, RadarChart, SectionHeader, TextArea } from "@/components/ui";
 import { conversations, faq, featuredArtwork as art, feelings, inspiration, instagram, stories } from "@/data/mock";
 import { creativityWorkImages, instagramImages } from "@/lib/assetImages";
@@ -26,7 +26,7 @@ export default function SocialImpact() {
   }, [hash]);
 
   return (
-    <MobileScreen area="social" footer={<FooterTabs />}>
+    <MobileScreen area="social">
       <PageTopBar />
       <PageTitle title="Social impact" lead="What this painting sparks in the homes it visits." />
 

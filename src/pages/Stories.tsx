@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
-import { FooterTabs, MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
+import { MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
 import { Icon, TextArea } from "@/components/ui";
 import { featuredArtwork as art, stories as seedStories, type Story } from "@/data/mock";
 import { cn } from "@/lib/cn";
@@ -69,7 +69,7 @@ export default function Stories() {
   }
 
   return (
-    <MobileScreen area="social" footer={<FooterTabs />}>
+    <MobileScreen area="social">
       <PageTopBar backTo="/social" backLabel="Social impact" />
       <PageTitle title="Stories" lead={`What people remember from living with ${art.title}.`} />
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router";
 import { SensorIcon } from "@/components/features/SensorIllustration";
-import { FooterTabs, MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
+import { MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
 import { Button, Card, Icon, List, RuleRow, SectionHeader, SensorTile, StatusDot, StepRow, TextArea } from "@/components/ui";
 import { featuredArtwork as art, handlingRules, hangingSteps, sensorAdvice, sensorReadings } from "@/data/mock";
 import { useSensorSetup } from "@/lib/sensorSetup";
@@ -18,7 +18,7 @@ export default function Conservation() {
   }, [hash]);
 
   return (
-    <MobileScreen area="conservation" footer={<FooterTabs />}>
+    <MobileScreen area="conservation">
       <PageTopBar />
       <PageTitle title="Care guide" lead="How to live with an original painting at home." />
 

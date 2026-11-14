@@ -11,7 +11,8 @@ import LoanSurvey from "@/pages/LoanSurvey";
 import Placeholder from "@/pages/Placeholder";
 import SensorSetup from "@/pages/SensorSetup";
 import SocialImpact from "@/pages/SocialImpact";
-import StaffDashboard from "@/pages/StaffDashboard";
+import StaffArtwork from "@/pages/StaffArtwork";
+import StaffOverview from "@/pages/StaffOverview";
 import Stories from "@/pages/Stories";
 
 const router = createBrowserRouter(
@@ -34,8 +35,9 @@ const router = createBrowserRouter(
         { path: "/contact", element: <Placeholder title="Contact" /> },
         { path: "/qa", element: <Placeholder title="Q&A" /> },
         { path: "/about", element: <Placeholder title="About" /> },
-        // Staff (desktop)
-        { path: "/staff", element: <StaffDashboard /> },
+        // Staff dashboard (desktop + mobile), opened from the footer «Dashboard» tab
+        { path: "/staff", element: <StaffOverview /> },
+        { path: "/staff/artworks", element: <StaffArtwork /> },
         // Dev
         { path: "/design-system", element: <DesignSystem /> },
         { path: "*", element: <Placeholder title="Not found" /> },

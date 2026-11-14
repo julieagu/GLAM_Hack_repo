@@ -1,6 +1,6 @@
 import { ImageViewer } from "@/components/features/ImageViewer";
 import { LoanCard } from "@/components/features/LoanCard";
-import { FooterTabs, MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
+import { MobileScreen, PageTitle, PageTopBar } from "@/components/layout";
 import { KeyValueRow, List, PersonRow, SectionHeader, Tag, TimelineRow } from "@/components/ui";
 import { currentLoan, featuredArtwork as art, previousRenters } from "@/data/mock";
 import { useArtworkImages } from "@/lib/useArtworkImages";
@@ -23,7 +23,7 @@ export default function ArtworkInfo() {
   const images = useArtworkImages(art.title);
 
   return (
-    <MobileScreen area="artwork" footer={<FooterTabs />}>
+    <MobileScreen area="artwork">
       <PageTopBar />
       <PageTitle title={art.title} lead={`${art.artist}, ${art.period}`} />
 

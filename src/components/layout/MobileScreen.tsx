@@ -6,7 +6,7 @@ interface MobileScreenProps {
   /** Area colour of the screen; omit for neutral (white) screens like Home. */
   area?: Area;
   children: ReactNode;
-  /** Pinned to the bottom (FooterTabs or a step flow's BottomActions). */
+  /** Pinned to the bottom. FooterTabs is only used on Home. */
   footer?: ReactNode;
   className?: string;
 }
@@ -44,7 +44,8 @@ export function MobileScreen({ area, children, footer, className }: MobileScreen
           className,
         )}
       >
-        <main className="flex min-h-0 flex-1 flex-col">{children}</main>
+        {/* Without a footer (every page except Home), keep content clear of the home indicator. */}
+        <main className={cn("flex min-h-0 flex-1 flex-col", !footer && "pb-[env(safe-area-inset-bottom)]")}>{children}</main>
         {footer && <div className="sticky bottom-0 z-10 bg-white pb-[env(safe-area-inset-bottom)]">{footer}</div>}
       </div>
     </div>

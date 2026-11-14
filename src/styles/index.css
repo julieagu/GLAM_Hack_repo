@@ -16,6 +16,14 @@
   --container-phone: 430px;
 }
 
+/*
+ * Staff dashboard switch (Paper: Desktop/Staff/* vs Mobile/Staff/*).
+ * `desk:` = 3 area tiles side by side, top nav, real tables. Below it: the
+ * stacked mobile layout with the fixed bottom nav. 1024px, not --breakpoint-lg
+ * (1440), so laptops get the desktop layout too.
+ */
+@custom-variant desk (@media (width >= 64rem));
+
 /* Conversation deck: the decided card flies off from where the finger left it. */
 @keyframes card-fly {
   from {
