@@ -16,14 +16,47 @@ export const project = {
 export interface TeamMember {
   name: string;
   role: string;
-  bio: string;
+  /** Contributions, one per line (mirrors "Team Credit" in the README). */
+  bio: string[];
   linkedin: string;
   website?: string;
 }
 
 export const team: TeamMember[] = [
-  { name: "Christine", role: "Project Manager", bio: "", linkedin: "linkedin.com/in/christine-müller-stalder" },
-  { name: "Juliane", role: "Role placeholder", bio: "", linkedin: "https://www.linkedin.com/in/jul-eberhardt/" },
-  { name: "Lara", role: "UX & UI Designer", bio: "", linkedin: "https://www.linkedin.com/in/lara-rodrigues-ristic/", website: "https://lararr.com/" },
-  { name: "Julie", role: "UX Designer & Web Developer", bio: "", linkedin: "https://www.linkedin.com/in/julie-agustoni/", website: "https://julieagustoni.com/" },
+  {
+    name: "Christine Müller-Stalder",
+    role: "Project Manager & Challenge Owner",
+    bio: [
+      "Artothek expertise: how loans and conservation work in practice",
+      "Brought the SKKG challenge, with Sonja Gasser",
+      "Concept, core features, pitch and slides",
+    ],
+    linkedin: "linkedin.com/in/christine-müller-stalder",
+  },
+  {
+    name: "Juliane Eberhardt",
+    role: "Content & Research",
+    bio: ["Research and content", "Concept and core features", "Pitch and slides"],
+    linkedin: "https://www.linkedin.com/in/jul-eberhardt/",
+  },
+  {
+    name: "Lara Rodrigues Ristic",
+    role: "UX & UI Designer",
+    bio: ["Research and the rental journey", "Concept and core features", "Pitch and slides"],
+    linkedin: "https://www.linkedin.com/in/lara-rodrigues-ristic/",
+    website: "https://lararr.com/",
+  },
+  {
+    name: "Julie Agustoni",
+    role: "UX Designer & Web Developer",
+    bio: [
+      "Research, journey and concept (with the team)",
+      "Led the architecture and data: kit → web app → dashboard, SKKG open data",
+      "UI and design system in Paper (shared)",
+      "Built and deployed the working prototype",
+      "Pitch and slides",
+    ],
+    linkedin: "https://www.linkedin.com/in/julie-agustoni/",
+    website: "https://julieagustoni.com/",
+  },
 ];

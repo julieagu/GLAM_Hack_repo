@@ -51,7 +51,13 @@ function TeamMember({ name, role, bio, linkedin, website }: (typeof team)[number
       <div className="flex flex-col gap-0.5">
         <span className="text-lead">{name}</span>
         <span className="text-micro font-medium tracking-wide">{role}</span>
-        <p className="text-caption leading-5 text-area-ink">{bio}</p>
+        {bio.length > 0 && (
+          <ul className="mt-1 flex list-disc flex-col gap-1 pl-4 text-caption leading-5 text-area-ink">
+            {bio.map((line) => (
+              <li key={line}>{line}</li>
+            ))}
+          </ul>
+        )}
       </div>
       <div className="flex flex-wrap gap-1.5">
         <LinkedInLink name={name} url={linkedin} />

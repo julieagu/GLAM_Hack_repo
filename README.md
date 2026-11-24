@@ -2,14 +2,52 @@
 
 Web app for the SKKG Artothek («Kunst auf Zeit»): people borrow an original artwork for six months.
 
+## The project in brief
+The SKKG Artothek in Winterthur lends original artworks to private homes for 3–6 months. That stay at home is where most of the impact happens, and it is also the part SKKG knows least about. The conservation team gets no data on temperature, humidity or light. The Artothek learns nothing about the conversations and feelings the artwork sparks.
+
+
+### the Digital Impact Monitor:  
+- A small kit with sensors and an NFC tag that comes with the artwork rented.  
+Placed next to the artwork, it collects data about the environment, like light, humidity and temperature.  
+- Tap it with your phone to open the mobile app; there you’ll find the artwork's information and history, live care conditions, and, most importantly, a section dedicated to the piece's stay in people's homes, stories from previous hosts, the feelings it evokes and  the conversations it started.
+- A staff dashboard for the conservation teams brings together the physical and social data for every artwork.
+
 - **Borrower app (mobile, 375):** artwork information (mint), social impact (orange), conservation with live sensor data (blue), sensor setup and end-of-loan survey flows.
 - **Staff dashboard (desktop, 1440):** one artwork at a glance + Artothek overview.
 
-Designs live in Paper (file **Glam_hack**): `High_fidelity` (mobile), `Desktop – Staff`, and `Design System v2 – Dev handoff` (tokens + components).
+Designs live in Paper and build with Claude Opus 5.5
 
 ## Stack
 
 Vite · React 19 · TypeScript · Tailwind CSS v4 · React Router 7. Artwork data comes from the SKKG SPARQL endpoint (`src/lib/artothek.ts`).
+
+
+
+## Team Credit
+
+Research, the rental journey, the concept and the core features were team work. All four of us took part in the pitch.
+
+- **Julie Agustoni — UX Designer & Web Developer**
+  - research, journey and concept (with the team)
+  - led the architecture and data: kit → web app → dashboard, SKKG open data
+  - UI and design system in Paper (shared)
+  - built and deployed the working prototype
+  - pitch and slides
+
+- **Christine Müller Stalder — Project Manager # Challeng Owner**
+  - Artothek expertise: how loans and conservation work in practice
+  - brought the SKKG challenge, with Sonja Gasser
+  - concept, core features, pitch and slides
+
+- **Lara Rodrigues Ristić — UX & UI Designer**
+  - research and the rental journey
+  - concept and core features
+  - pitch and slides
+- **Juliane Eberhardt** — **Content & Research**
+  - research and content
+  - concept and core features
+  - pitch and slides
+
 
 ## Getting started
 
@@ -83,11 +121,7 @@ public/             Static assets (SKKG logo)
 
 Breakpoints follow the DS: `sm` 375, `md` 768, `lg` 1440.
 
-## Conventions
 
-- Mobile screens: white cards on the area colour; primary button = ink fill with the area colour as label; footer tabs always white.
-- Desktop: full-bleed area tiles, radius 0, outlined pills.
-- Component names match the Paper layer names (e.g. `SectionHeader`, `SensorTile`, `StepHeader`).
 
 ## License
 
